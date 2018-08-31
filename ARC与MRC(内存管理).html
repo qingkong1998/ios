@@ -1,0 +1,478 @@
+
+	    <html>
+	      <head>
+				  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	        <title>ARC与MRC(内存管理)</title>
+					
+					<link href="/var/lib/gems/2.5.0/gems/tocmd-0.4.3/vendor/toc/style/github-bf51422f4bb36427d391e4b75a1daa083c2d840e.css" media="all" rel="stylesheet" type="text/css"/>
+					<link href="/var/lib/gems/2.5.0/gems/tocmd-0.4.3/vendor/toc/style/github2-d731afd4f624c99a4b19ad69f3083cd6d02b81d5.css" media="all" rel="stylesheet" type="text/css"/>
+					<link href="/var/lib/gems/2.5.0/gems/tocmd-0.4.3/vendor/toc/css/zTreeStyle/zTreeStyle.css" media="all" rel="stylesheet" type="text/css"/>
+			
+				  <style>
+					pre {
+					    counter-reset: line-numbering;
+					    border: solid 1px #d9d9d9;
+					    border-radius: 0;
+					    background: #fff;
+					    padding: 0;
+					    line-height: 23px;
+					    margin-bottom: 30px;
+					    white-space: pre;
+					    overflow-x: auto;
+					    word-break: inherit;
+					    word-wrap: inherit;
+					}
+
+					pre a::before {
+					  content: counter(line-numbering);
+					  counter-increment: line-numbering;
+					  padding-right: 1em; /* space after numbers */
+					  width: 25px;
+					  text-align: right;
+					  opacity: 0.7;
+					  display: inline-block;
+					  color: #aaa;
+					  background: #eee;
+					  margin-right: 16px;
+					  padding: 2px 10px;
+					  font-size: 13px;
+					  -webkit-touch-callout: none;
+					  -webkit-user-select: none;
+					  -khtml-user-select: none;
+					  -moz-user-select: none;
+					  -ms-user-select: none;
+					  user-select: none;
+					}
+
+					pre a:first-of-type::before {
+					  padding-top: 10px;
+					}
+
+					pre a:last-of-type::before {
+					  padding-bottom: 10px;
+					}
+
+					pre a:only-of-type::before {
+					  padding: 10px;
+					}
+			
+					.highlight { background-color: #ffffcc } /* RIGHT */
+					</style>
+	      </head>
+	      <body>
+				  <div>
+							<div style='width:25%;'>
+									<ul id="tree" class="ztree" style='width:100%'>
+		
+									</ul>
+							</div>
+			        <div id='readme' style='width:70%;margin-left:20%;'>
+			          	<article class='markdown-body'>
+			            	<style>.highlight .hll { background-color: #ffffcc }
+.highlight  { background: #f0f0f0; }
+.highlight .c { color: #60a0b0; font-style: italic } /* Comment */
+.highlight .err { border: 1px solid #FF0000 } /* Error */
+.highlight .k { color: #007020; font-weight: bold } /* Keyword */
+.highlight .o { color: #666666 } /* Operator */
+.highlight .ch { color: #60a0b0; font-style: italic } /* Comment.Hashbang */
+.highlight .cm { color: #60a0b0; font-style: italic } /* Comment.Multiline */
+.highlight .cp { color: #007020 } /* Comment.Preproc */
+.highlight .cpf { color: #60a0b0; font-style: italic } /* Comment.PreprocFile */
+.highlight .c1 { color: #60a0b0; font-style: italic } /* Comment.Single */
+.highlight .cs { color: #60a0b0; background-color: #fff0f0 } /* Comment.Special */
+.highlight .gd { color: #A00000 } /* Generic.Deleted */
+.highlight .ge { font-style: italic } /* Generic.Emph */
+.highlight .gr { color: #FF0000 } /* Generic.Error */
+.highlight .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.highlight .gi { color: #00A000 } /* Generic.Inserted */
+.highlight .go { color: #888888 } /* Generic.Output */
+.highlight .gp { color: #c65d09; font-weight: bold } /* Generic.Prompt */
+.highlight .gs { font-weight: bold } /* Generic.Strong */
+.highlight .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.highlight .gt { color: #0044DD } /* Generic.Traceback */
+.highlight .kc { color: #007020; font-weight: bold } /* Keyword.Constant */
+.highlight .kd { color: #007020; font-weight: bold } /* Keyword.Declaration */
+.highlight .kn { color: #007020; font-weight: bold } /* Keyword.Namespace */
+.highlight .kp { color: #007020 } /* Keyword.Pseudo */
+.highlight .kr { color: #007020; font-weight: bold } /* Keyword.Reserved */
+.highlight .kt { color: #902000 } /* Keyword.Type */
+.highlight .m { color: #40a070 } /* Literal.Number */
+.highlight .s { color: #4070a0 } /* Literal.String */
+.highlight .na { color: #4070a0 } /* Name.Attribute */
+.highlight .nb { color: #007020 } /* Name.Builtin */
+.highlight .nc { color: #0e84b5; font-weight: bold } /* Name.Class */
+.highlight .no { color: #60add5 } /* Name.Constant */
+.highlight .nd { color: #555555; font-weight: bold } /* Name.Decorator */
+.highlight .ni { color: #d55537; font-weight: bold } /* Name.Entity */
+.highlight .ne { color: #007020 } /* Name.Exception */
+.highlight .nf { color: #06287e } /* Name.Function */
+.highlight .nl { color: #002070; font-weight: bold } /* Name.Label */
+.highlight .nn { color: #0e84b5; font-weight: bold } /* Name.Namespace */
+.highlight .nt { color: #062873; font-weight: bold } /* Name.Tag */
+.highlight .nv { color: #bb60d5 } /* Name.Variable */
+.highlight .ow { color: #007020; font-weight: bold } /* Operator.Word */
+.highlight .w { color: #bbbbbb } /* Text.Whitespace */
+.highlight .mb { color: #40a070 } /* Literal.Number.Bin */
+.highlight .mf { color: #40a070 } /* Literal.Number.Float */
+.highlight .mh { color: #40a070 } /* Literal.Number.Hex */
+.highlight .mi { color: #40a070 } /* Literal.Number.Integer */
+.highlight .mo { color: #40a070 } /* Literal.Number.Oct */
+.highlight .sa { color: #4070a0 } /* Literal.String.Affix */
+.highlight .sb { color: #4070a0 } /* Literal.String.Backtick */
+.highlight .sc { color: #4070a0 } /* Literal.String.Char */
+.highlight .dl { color: #4070a0 } /* Literal.String.Delimiter */
+.highlight .sd { color: #4070a0; font-style: italic } /* Literal.String.Doc */
+.highlight .s2 { color: #4070a0 } /* Literal.String.Double */
+.highlight .se { color: #4070a0; font-weight: bold } /* Literal.String.Escape */
+.highlight .sh { color: #4070a0 } /* Literal.String.Heredoc */
+.highlight .si { color: #70a0d0; font-style: italic } /* Literal.String.Interpol */
+.highlight .sx { color: #c65d09 } /* Literal.String.Other */
+.highlight .sr { color: #235388 } /* Literal.String.Regex */
+.highlight .s1 { color: #4070a0 } /* Literal.String.Single */
+.highlight .ss { color: #517918 } /* Literal.String.Symbol */
+.highlight .bp { color: #007020 } /* Name.Builtin.Pseudo */
+.highlight .fm { color: #06287e } /* Name.Function.Magic */
+.highlight .vc { color: #bb60d5 } /* Name.Variable.Class */
+.highlight .vg { color: #bb60d5 } /* Name.Variable.Global */
+.highlight .vi { color: #bb60d5 } /* Name.Variable.Instance */
+.highlight .vm { color: #bb60d5 } /* Name.Variable.Magic */
+.highlight .il { color: #40a070 } /* Literal.Number.Integer.Long */</style>
+<h2><strong>【掌握】ARC 与 MRC</strong></h2>
+
+<h3><strong>MRC项目 转 ARC项目</strong></h3>
+
+<ul>
+<li><strong>Edit -&gt; Refactor-&gt; Convert to Objective-C ARC</strong><br></li>
+</ul>
+
+<h3><strong>MRC 与 ARC 共存</strong></h3>
+
+<ul>
+<li><strong>选中项目跟节点 -&gt; 选中target -&gt; Build Phases-&gt;Compile Sources (1 item) -&gt;在需要设置为不使用ARC文件所在的行与complier Flags的列 的交汇处双击，写上命令 -fno-objc-arc</strong><br></li>
+</ul>
+
+<h2><strong>【掌握】分类</strong></h2>
+
+<h3><strong>【掌握】作用：扩充原有类的功能</strong></h3>
+
+<h3><strong>【掌握】 定义</strong></h3>
+
+<ul>
+<li><strong>名称：原有类的名称 (分类名称)</strong><br></li>
+<li><strong>文件名称：原有类的名称 + 分类名称</strong><br></li>
+</ul>
+
+<h3><strong>【了解】优点</strong></h3>
+
+<ul>
+<li><strong>代码模块化</strong><br></li>
+<li><strong>团队协作</strong><br></li>
+<li><strong>可以扩充系统自带类的功能</strong><br></li>
+</ul>
+
+<h3><strong>【掌握】使用</strong></h3>
+
+<ul>
+<li><strong>在分类中可以声明和实现新的方法</strong><br></li>
+<li><strong>在分类的方法中可以访问原有类的成员变量</strong><br></li>
+</ul>
+
+<h3><strong>【掌握】练习</strong></h3>
+
+<ul>
+<li><strong>给NSString类增加一个计算字符串中有多少数字的功能</strong><br></li>
+<li><strong>给NSObject方法增加一个run方法</strong><br>
+
+<ul>
+<li><strong>给NSObject扩展分类，应该非常谨慎，因为他会作用到所的类上面</strong><br></li>
+</ul></li>
+</ul>
+
+<h3><strong>【掌握】注意点</strong></h3>
+
+<ul>
+<li><strong>分类只能扩充功能不能扩充属性</strong><br></li>
+<li><strong>在分类使用@property 只能生成方法的声明，不能生成方法的实现，更不能生成成员变量</strong><br></li>
+<li><strong>分类中不能有与原来类同名的方法，不同分类中也不能有同名的方法</strong><br></li>
+<li><strong>【理解】如果分类中如果存在与原来类中的同名函数，那么分类中的方法会覆盖原有类中的方法(哪怕你没有导入这个分类)</strong><br></li>
+<li><strong>【理解】如果多个分类中有相同的方法，最后将使用最后编译的那个分类中的方法</strong><br></li>
+</ul>
+
+<h2><strong>【掌握】类扩展</strong></h2>
+
+<h3><strong>用在.m文件中，给类增加私有的成员变量和方法</strong></h3>
+
+<h3><strong>类扩展中小括号中没有内容</strong></h3>
+
+<h2><strong>【掌握】SEL</strong></h2>
+
+<h3><strong>概念【掌握】</strong></h3>
+
+<ul>
+<li><strong>它是一种代表着方法的签名数据类型，我们也成为它使一个选择器</strong><br></li>
+</ul>
+
+<h3><strong>使用</strong></h3>
+
+<ul>
+<li><strong>【掌握】定义普通的变量</strong><br></li>
+<li><strong>【理解】作为方法实参</strong><br>
+
+<ul>
+<li><strong>与NSObject 相关方法配合使用</strong><br>
+
+<ul>
+<li><strong>【掌握】判断一个对象是否实现了某个方法</strong><br>
+
+<ul>
+<li>respondsToSelector:(SEL)<br></li>
+</ul></li>
+<li><strong>[了解]执行对象上某个的方法</strong><br>
+
+<ul>
+<li>performSelector:(SEL)<br></li>
+<li>performSelector:(SEL) withObject:(id)<br></li>
+<li>performSelector:(SEL) withObject:(id) withObject:(id)<br></li>
+</ul></li>
+<li><strong>【了解】延迟执行某个对象上的方法</strong><br>
+
+<ul>
+<li>performSelector:(SEL) withObject:(id) afterDelay:(NSTimeInterval)]<br></li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li><strong>[了解] 方法形参</strong><br>
+
+<ul>
+<li><strong>makeObject:(id) performSelector:(SEL)</strong><br></li>
+</ul></li>
+<li><strong>【了解】作为方法的返回值</strong><br></li>
+</ul>
+
+<h3><strong>【了解】OC中的方法调用过程</strong></h3>
+
+<h2><strong>【掌握】block</strong></h2>
+
+<h3><strong>【掌握】作用：封装代码</strong></h3>
+
+<h3><strong>【掌握】优点：消除了函数不能能定义在方法内部的缺点，使用起来更加灵活</strong></h3>
+
+<h3><strong>【理解】使用</strong></h3>
+
+<ul>
+<li><strong>【掌握】定义变量</strong><br>
+
+<ul>
+<li><strong>返回值类型 (^变量名称) (形参列表)</strong><br></li>
+</ul></li>
+<li><strong>【掌握】定义功能</strong><br>
+
+<ul>
+<li><strong>^返回值类型 (形参列表)</strong><br>
+
+<ul>
+<li><strong>无参无返回值</strong><br>
+
+<ul>
+<li><strong>^{ 语句... };</strong><br></li>
+</ul></li>
+<li><strong>有参无返回值</strong><br>
+
+<ul>
+<li><strong>^(参数列表){语句...}</strong><br></li>
+</ul></li>
+<li><strong>有参有返回值</strong><br>
+
+<ul>
+<li><strong>^(参数列表){语句...}</strong><br></li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li><strong>【掌握】作为函数参数</strong><br>
+
+<ul>
+<li><strong>返回值类型(^)(形参列表)</strong><br></li>
+<li><strong>技巧：参数列表中写上参数的名称，方便以后使用</strong><br></li>
+</ul></li>
+<li><strong>【理解】typedef 来定义类型</strong><br>
+
+<ul>
+<li><strong>typedef 返回值类型 (^block类型名称) (形参列表)</strong><br></li>
+</ul></li>
+</ul>
+
+<h3><strong>【理解】使用场景</strong></h3>
+
+<ul>
+<li><strong>程序员的一天</strong><br></li>
+<li><strong>当一个方法中前面一部分是确定的后面一部分也是确定的，只有中间一部分经常变化，那么中间的这部分就可以提取成为一个block</strong><br></li>
+</ul>
+
+<h3><strong>【掌握】注意点</strong></h3>
+
+<ul>
+<li><strong>block内部不可以改变局部变量的值</strong><br></li>
+<li><strong>若想改变局部变量值，就需要使用__block 来修饰这个变量</strong><br></li>
+</ul>
+
+<h2><strong>【掌握】协议</strong></h2>
+
+<h3><strong>【掌握】概念：两个或两个以上对象之间约定</strong></h3>
+
+<h3><strong>【掌握】定义</strong></h3>
+
+<ul>
+<li><p>@protocol <strong>协议名称</strong> <NSObject>  </p>
+
+<p>//<strong>声明方法</strong>  </p>
+
+<p>@end  </p>
+
+<ul>
+<li><strong>中间只写方法声明</strong><br></li>
+<li><strong>需要遵守协议</strong>NSObject<br></li>
+<li><strong>以</strong>@protocol <strong>开头以</strong> @end <strong>结尾</strong><br></li>
+</ul></li>
+<li><p><strong>一个协议也可以遵守多个协议</strong>  </p>
+
+<ul>
+<li><p>@protocol <strong>协议名称</strong> &lt;<strong>协议</strong>1*<em>,协议2，协议3 ...</em>*&gt;  </p>
+
+<p>//<strong>声明方法</strong>  </p>
+
+<p>@end  </p></li>
+</ul></li>
+</ul>
+
+<h3><strong>【掌握】协议的基本使用</strong></h3>
+
+<ul>
+<li><strong>第一步：定义协议</strong><br></li>
+<li><p><strong>第二步：遵守协议</strong>  </p>
+
+<ul>
+<li><p><strong>在声明类的时候，在类名后面的通过&lt;协议名称&gt;来遵守协议</strong>  </p>
+
+<ul>
+<li><p>@interface <strong>类名</strong> : <strong>父类名称</strong> &lt;<strong>协议</strong>&gt;  </p>
+
+<p>@end  </p></li>
+</ul></li>
+<li><p><strong>在类扩展中遵守协议</strong>  </p>
+
+<ul>
+<li><p>@interface <strong>类名()</strong> &lt;<strong>协议</strong>&gt;  </p>
+
+<p>@end  </p></li>
+</ul></li>
+</ul></li>
+<li><p><strong>第三步：实现协议中的方法</strong>  </p></li>
+<li><p><strong>【掌握】注意点</strong>  </p>
+
+<ul>
+<li><p><strong>一个类可以遵守多个协议中间以逗号隔开</strong>  </p>
+
+<ul>
+<li><p>@interface <strong>类名</strong> : <strong>父类名称</strong> &lt;<strong>协议1,协议2,协议3...</strong>&gt;  </p>
+
+<p>@end  </p></li>
+</ul></li>
+</ul></li>
+</ul>
+
+<h3><strong>【掌握】id 类型与协议</strong></h3>
+
+<ul>
+<li><strong>id&lt;协议名称&gt; 变量名称</strong><br>
+
+<ul>
+<li><strong>通过这种方式定义出来的指针变量，只能指向遵循了该协议的对象</strong><br></li>
+<li><strong>通过这方式定义出来的指针变量，可以指向遵循该协议的任意对象</strong><br></li>
+</ul></li>
+</ul>
+
+<h3><strong>【掌握】两个关键字</strong></h3>
+
+<ul>
+<li>@required<br>
+
+<ul>
+<li><strong>表示遵守该协议的类必须要实现的方法</strong><br></li>
+</ul></li>
+<li>@optional<br>
+
+<ul>
+<li><strong>表示遵守协议的类可以选择实现的方法</strong><br></li>
+</ul></li>
+</ul>
+
+<h2><strong>【掌握】代理设计模式</strong></h2>
+
+<h3><strong>使用场景</strong></h3>
+
+<ul>
+<li><strong>当A类对象发生了什么事，想通知B类对象的时候(让B类对象成为A类对象的代理)</strong><br></li>
+<li><strong>当A类对象有些事情，自己无法处理，需要B类对象帮助它处理( 让B类对象成为A类对象的代理)</strong><br></li>
+<li><strong>当B类对象想要监听A类对象中发生的事情的时候(让B类对象成为A类对象的代理)</strong><br></li>
+</ul>
+
+<h3><strong>实现步骤</strong></h3>
+
+<ul>
+<li><strong>A类中定义协议</strong><br>
+
+<ul>
+<li><strong>该协议名称为ADelegate,其中声明一些希望B类实现的方法</strong><br></li>
+</ul></li>
+<li><strong>A类中添加一个类型 id<ADelegate> delegate的属性</strong><br></li>
+<li><strong>A类中当发生了什么事的时候,调用delegate相应的方法</strong><br>
+
+<ul>
+<li><strong>注意在调用这个方法之前首先要判断delegate是否确实实现了这个方法，只有delegate实现这个方法才能调用这个方法</strong><br></li>
+</ul></li>
+<li><p><strong>B类遵守ADelegate的协议</strong>  </p>
+
+<ul>
+<li><p>@interface <strong>B()</strong> &lt;<strong>ADelegate</strong>&gt;  </p>
+
+<p>@end  </p></li>
+</ul></li>
+<li><p><strong>B类中实现ADelegate协议中声明的方法</strong>  </p>
+
+<ul>
+<li><strong>注意：这里实现的方法可以是某一个或某几个或是全部，取决B对象希望监听A对象的什么事件</strong><br></li>
+</ul></li>
+<li><p><strong>将B类对象赋值给A类对象的delegate属性</strong>  </p></li>
+</ul>
+
+<h3><strong>使用场景</strong></h3>
+
+<ul>
+<li><strong>婴儿与保姆</strong><br>
+
+<ul>
+<li><strong>婴儿想吃了要通知保姆，让保姆成为婴儿代理</strong><br></li>
+<li><strong>保姆想知道婴儿什么时候想吃了，让保姆成为婴儿的代理</strong><br></li>
+<li><strong>婴儿自己不会吃，需要保姆帮忙，让保姆成为婴儿的代理</strong><br></li>
+</ul></li>
+</ul>
+
+			          	</article>
+			        </div>
+					</div>
+	      </body>
+	    </html>
+			<script type="text/javascript" src="/var/lib/gems/2.5.0/gems/tocmd-0.4.3/vendor/toc/js/jquery-1.4.4.min.js"></script>
+			<script type="text/javascript" src="/var/lib/gems/2.5.0/gems/tocmd-0.4.3/vendor/toc/js/jquery.ztree.all-3.5.min.js"></script>
+			<script type="text/javascript" src="/var/lib/gems/2.5.0/gems/tocmd-0.4.3/vendor/toc/js/ztree_toc.js"></script>
+			<SCRIPT type="text/javascript" >
+			<!--
+			$(document).ready(function(){
+				$('#tree').ztree_toc({
+					is_auto_number:true,
+					documment_selector:'.markdown-body'
+				});
+			});
+			//-->
+			</SCRIPT>
+	  

@@ -1,0 +1,423 @@
+
+	    <html>
+	      <head>
+				  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	        <title>内存管理ARC，MRC</title>
+					
+					<link href="/var/lib/gems/2.5.0/gems/tocmd-0.4.3/vendor/toc/style/github-bf51422f4bb36427d391e4b75a1daa083c2d840e.css" media="all" rel="stylesheet" type="text/css"/>
+					<link href="/var/lib/gems/2.5.0/gems/tocmd-0.4.3/vendor/toc/style/github2-d731afd4f624c99a4b19ad69f3083cd6d02b81d5.css" media="all" rel="stylesheet" type="text/css"/>
+					<link href="/var/lib/gems/2.5.0/gems/tocmd-0.4.3/vendor/toc/css/zTreeStyle/zTreeStyle.css" media="all" rel="stylesheet" type="text/css"/>
+			
+				  <style>
+					pre {
+					    counter-reset: line-numbering;
+					    border: solid 1px #d9d9d9;
+					    border-radius: 0;
+					    background: #fff;
+					    padding: 0;
+					    line-height: 23px;
+					    margin-bottom: 30px;
+					    white-space: pre;
+					    overflow-x: auto;
+					    word-break: inherit;
+					    word-wrap: inherit;
+					}
+
+					pre a::before {
+					  content: counter(line-numbering);
+					  counter-increment: line-numbering;
+					  padding-right: 1em; /* space after numbers */
+					  width: 25px;
+					  text-align: right;
+					  opacity: 0.7;
+					  display: inline-block;
+					  color: #aaa;
+					  background: #eee;
+					  margin-right: 16px;
+					  padding: 2px 10px;
+					  font-size: 13px;
+					  -webkit-touch-callout: none;
+					  -webkit-user-select: none;
+					  -khtml-user-select: none;
+					  -moz-user-select: none;
+					  -ms-user-select: none;
+					  user-select: none;
+					}
+
+					pre a:first-of-type::before {
+					  padding-top: 10px;
+					}
+
+					pre a:last-of-type::before {
+					  padding-bottom: 10px;
+					}
+
+					pre a:only-of-type::before {
+					  padding: 10px;
+					}
+			
+					.highlight { background-color: #ffffcc } /* RIGHT */
+					</style>
+	      </head>
+	      <body>
+				  <div>
+							<div style='width:25%;'>
+									<ul id="tree" class="ztree" style='width:100%'>
+		
+									</ul>
+							</div>
+			        <div id='readme' style='width:70%;margin-left:20%;'>
+			          	<article class='markdown-body'>
+			            	<style>.highlight .hll { background-color: #ffffcc }
+.highlight  { background: #f0f0f0; }
+.highlight .c { color: #60a0b0; font-style: italic } /* Comment */
+.highlight .err { border: 1px solid #FF0000 } /* Error */
+.highlight .k { color: #007020; font-weight: bold } /* Keyword */
+.highlight .o { color: #666666 } /* Operator */
+.highlight .ch { color: #60a0b0; font-style: italic } /* Comment.Hashbang */
+.highlight .cm { color: #60a0b0; font-style: italic } /* Comment.Multiline */
+.highlight .cp { color: #007020 } /* Comment.Preproc */
+.highlight .cpf { color: #60a0b0; font-style: italic } /* Comment.PreprocFile */
+.highlight .c1 { color: #60a0b0; font-style: italic } /* Comment.Single */
+.highlight .cs { color: #60a0b0; background-color: #fff0f0 } /* Comment.Special */
+.highlight .gd { color: #A00000 } /* Generic.Deleted */
+.highlight .ge { font-style: italic } /* Generic.Emph */
+.highlight .gr { color: #FF0000 } /* Generic.Error */
+.highlight .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.highlight .gi { color: #00A000 } /* Generic.Inserted */
+.highlight .go { color: #888888 } /* Generic.Output */
+.highlight .gp { color: #c65d09; font-weight: bold } /* Generic.Prompt */
+.highlight .gs { font-weight: bold } /* Generic.Strong */
+.highlight .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.highlight .gt { color: #0044DD } /* Generic.Traceback */
+.highlight .kc { color: #007020; font-weight: bold } /* Keyword.Constant */
+.highlight .kd { color: #007020; font-weight: bold } /* Keyword.Declaration */
+.highlight .kn { color: #007020; font-weight: bold } /* Keyword.Namespace */
+.highlight .kp { color: #007020 } /* Keyword.Pseudo */
+.highlight .kr { color: #007020; font-weight: bold } /* Keyword.Reserved */
+.highlight .kt { color: #902000 } /* Keyword.Type */
+.highlight .m { color: #40a070 } /* Literal.Number */
+.highlight .s { color: #4070a0 } /* Literal.String */
+.highlight .na { color: #4070a0 } /* Name.Attribute */
+.highlight .nb { color: #007020 } /* Name.Builtin */
+.highlight .nc { color: #0e84b5; font-weight: bold } /* Name.Class */
+.highlight .no { color: #60add5 } /* Name.Constant */
+.highlight .nd { color: #555555; font-weight: bold } /* Name.Decorator */
+.highlight .ni { color: #d55537; font-weight: bold } /* Name.Entity */
+.highlight .ne { color: #007020 } /* Name.Exception */
+.highlight .nf { color: #06287e } /* Name.Function */
+.highlight .nl { color: #002070; font-weight: bold } /* Name.Label */
+.highlight .nn { color: #0e84b5; font-weight: bold } /* Name.Namespace */
+.highlight .nt { color: #062873; font-weight: bold } /* Name.Tag */
+.highlight .nv { color: #bb60d5 } /* Name.Variable */
+.highlight .ow { color: #007020; font-weight: bold } /* Operator.Word */
+.highlight .w { color: #bbbbbb } /* Text.Whitespace */
+.highlight .mb { color: #40a070 } /* Literal.Number.Bin */
+.highlight .mf { color: #40a070 } /* Literal.Number.Float */
+.highlight .mh { color: #40a070 } /* Literal.Number.Hex */
+.highlight .mi { color: #40a070 } /* Literal.Number.Integer */
+.highlight .mo { color: #40a070 } /* Literal.Number.Oct */
+.highlight .sa { color: #4070a0 } /* Literal.String.Affix */
+.highlight .sb { color: #4070a0 } /* Literal.String.Backtick */
+.highlight .sc { color: #4070a0 } /* Literal.String.Char */
+.highlight .dl { color: #4070a0 } /* Literal.String.Delimiter */
+.highlight .sd { color: #4070a0; font-style: italic } /* Literal.String.Doc */
+.highlight .s2 { color: #4070a0 } /* Literal.String.Double */
+.highlight .se { color: #4070a0; font-weight: bold } /* Literal.String.Escape */
+.highlight .sh { color: #4070a0 } /* Literal.String.Heredoc */
+.highlight .si { color: #70a0d0; font-style: italic } /* Literal.String.Interpol */
+.highlight .sx { color: #c65d09 } /* Literal.String.Other */
+.highlight .sr { color: #235388 } /* Literal.String.Regex */
+.highlight .s1 { color: #4070a0 } /* Literal.String.Single */
+.highlight .ss { color: #517918 } /* Literal.String.Symbol */
+.highlight .bp { color: #007020 } /* Name.Builtin.Pseudo */
+.highlight .fm { color: #06287e } /* Name.Function.Magic */
+.highlight .vc { color: #bb60d5 } /* Name.Variable.Class */
+.highlight .vg { color: #bb60d5 } /* Name.Variable.Global */
+.highlight .vi { color: #bb60d5 } /* Name.Variable.Instance */
+.highlight .vm { color: #bb60d5 } /* Name.Variable.Magic */
+.highlight .il { color: #40a070 } /* Literal.Number.Integer.Long */</style>
+<h1><strong>内存管理</strong></h1>
+
+<h2><strong>栈与堆</strong></h2>
+
+<h3><strong>栈【掌握】</strong></h3>
+
+<ul>
+<li><strong>内存由系统管理</strong><br></li>
+<li><strong>局部变量保存在栈中</strong><br></li>
+<li><strong>当变量离开了其所在的代码块就会被回收</strong><br></li>
+</ul>
+
+<h3><strong>堆</strong></h3>
+
+<ul>
+<li><strong>需要程序员自己管理</strong><br></li>
+<li><strong>OC中的对象保存在堆中【掌握】</strong><br></li>
+<li><strong>内存管理不当造成的两个问题【掌握】</strong><br>
+
+<ul>
+<li><strong>内存泄露</strong><br>
+
+<ul>
+<li><strong>不再需要的对象没有释放，导致内存泄露，内存泄露会导致应用闪退</strong><br></li>
+</ul></li>
+<li><strong>野指针</strong><br>
+
+<ul>
+<li><strong>正在使用的对象被释放了，导致野指针，访问野指针导致程序崩溃</strong><br></li>
+</ul></li>
+</ul></li>
+<li><strong>MRC 手动内存管理【理解】</strong><br>
+
+<ul>
+<li><strong>引用计数</strong><br>
+
+<ul>
+<li><strong>每一个对象上都有一个引用计数器</strong><br></li>
+<li><strong>当对象出生的时候引用计数器为1</strong><br></li>
+<li><strong>当调用对象的 retain方法时候计数器+1</strong><br></li>
+<li><strong>当给对象发送一条release消息的时候，计数器-1</strong><br></li>
+<li><strong>当一个对象的引用计数为0的时候，这个对象立即被回收</strong><br></li>
+</ul></li>
+<li><strong>内存管理原则</strong><br>
+
+<ul>
+<li><strong>谁给一个对象发送 alloc,copy,retain消息，就必须在适当时候给这个对象发送相应的release 或 autorelease消息</strong><br></li>
+<li><strong>当你需要一个对象的时候就给这个对象的引用器+1，当你不在需要这个对象了，就将该对象引用计数器-1</strong><br></li>
+</ul></li>
+<li><strong>多个对象内存管理</strong><br>
+
+<ul>
+<li><strong>setter方法</strong><br>
+
+<ul>
+<li><strong>当设置新对象的时候需要对新对象做一次retain操作</strong><br></li>
+<li><strong>当原来的对象不需要了，需要对原来的对象做一次release操作</strong><br></li>
+<li><strong>如果是同一个对象不需要上面的操作</strong><br></li>
+<li><strong>QQ游戏的房间</strong><br></li>
+</ul></li>
+<li><strong>dealloc方法</strong><br>
+
+<ul>
+<li><strong>当一个对象即将被销毁的时候会调用这个方法</strong><br></li>
+<li><strong>它就相当于对象的遗言，在这里释放其成员所占用的内存</strong><br></li>
+<li><strong>在释放内存之前首先要调用[super dealloc]</strong><br></li>
+</ul></li>
+<li><strong>循环引用</strong><br>
+
+<ul>
+<li><strong>什么是循环引用</strong><br>
+
+<ul>
+<li><strong>当两个或多个对象间的引用构成一个封闭的环就是循环引用</strong><br></li>
+</ul></li>
+<li><strong>导致问题</strong><br>
+
+<ul>
+<li><strong>环中的所有对象都释放不了</strong><br></li>
+</ul></li>
+<li><strong>解决方案</strong><br>
+
+<ul>
+<li><strong>有一端必须是assign的</strong><br></li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li><strong>@property 的使用</strong><br>
+
+<ul>
+<li><strong>内存管理</strong><br>
+
+<ul>
+<li><strong>基本数据类型使用assign</strong><br></li>
+<li><strong>普通对象一般使用 retain</strong><br></li>
+<li><strong>NSString 及 block 对象使用copy</strong><br></li>
+<li><strong>循环引用一端使用assign</strong><br></li>
+</ul></li>
+<li><strong>权限控制</strong><br>
+
+<ul>
+<li><strong>readonly</strong><br>
+
+<ul>
+<li><strong>只读仅生成getter方法</strong><br></li>
+</ul></li>
+<li><strong>readwrite</strong><br>
+
+<ul>
+<li><strong>读写生成getter方法和setter方法</strong><br></li>
+</ul></li>
+</ul></li>
+<li><strong>线程安全</strong><br>
+
+<ul>
+<li>atomic<br>
+
+<ul>
+<li><strong>线程安全的，会给setter方法加锁,访问速度比较慢</strong><br></li>
+</ul></li>
+<li>nonatomic<br>
+
+<ul>
+<li><strong>非线程安全的，不会给setter方法加锁，访问速度快</strong><br></li>
+</ul></li>
+</ul></li>
+<li><strong>方法名称定制</strong><br>
+
+<ul>
+<li><strong>setter</strong><br>
+
+<ul>
+<li><strong>定制setter方法名称</strong><br></li>
+<li>…<br></li>
+</ul></li>
+<li><strong>getter</strong><br>
+
+<ul>
+<li><strong>定制getter方法名称</strong><br></li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li><strong>自动释放池</strong><br>
+
+<ul>
+<li><strong>作用</strong><br>
+
+<ul>
+<li><strong>延迟对象的释放</strong><br></li>
+</ul></li>
+<li><strong>原理</strong><br>
+
+<ul>
+<li><strong>自动释放池栈</strong><br></li>
+</ul></li>
+<li><strong>使用</strong><br>
+
+<ul>
+<li><strong>当你调用autorelease的时候会该对象放到离最近的自动释放池中</strong><br></li>
+<li><strong>当执行到自动释放池后面的大括号的时候，自动释放池会出栈，此时会该栈中的会所有对象做一次release操作</strong><br></li>
+<li><strong>你调用几次autorelease，当自动释放池被销毁的时候就会调用几次release</strong><br></li>
+</ul></li>
+<li><strong>优点</strong><br>
+
+<ul>
+<li><strong>你不必时刻关注对象的释放，让内存管理变的简单</strong><br></li>
+</ul></li>
+<li><strong>缺点</strong><br>
+
+<ul>
+<li><strong>对象不能及时的得到释放，如果对象占用内存很大，使用它会导致你程序闪退</strong><br></li>
+</ul></li>
+<li><strong>使用场景</strong><br>
+
+<ul>
+<li><strong>当一个对象很小，使用次数也比较少的时候可以使用自动释放</strong><br></li>
+<li><strong>当一个对象占用内存比较大的时候不要使用自动释放出</strong><br></li>
+<li><strong>快捷构造方法</strong><br></li>
+<li><strong>其他需要延长对象生命周期的地方</strong><br></li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li><strong>ARC 自动引用计数【掌握】</strong><br>
+
+<ul>
+<li><strong>什么是自动引用计数</strong><br>
+
+<ul>
+<li><strong>他是编译器特性，不是运行时特性</strong><br>
+
+<ul>
+<li>…<br></li>
+</ul></li>
+<li><strong>编译器会再适当的时候插入内存管理的代码</strong><br></li>
+</ul></li>
+<li><strong>强指针</strong><br>
+
+<ul>
+<li><strong>默认所有的指针都是强指针</strong><br></li>
+<li><strong>只要有强指针指向这个对象，这个对象就不会被销毁</strong><br></li>
+<li><strong>只要没有强指针指向这个对象, 该对象立即被销毁</strong><br></li>
+<li><strong>关键字：__strong</strong><br></li>
+</ul></li>
+<li><strong>弱指针</strong><br>
+
+<ul>
+<li><strong>弱指针不影响对象的销毁</strong><br></li>
+<li><strong>关键字 __weak</strong><br></li>
+</ul></li>
+<li><strong>循环引用</strong><br>
+
+<ul>
+<li><strong>什么是循环引用</strong><br>
+
+<ul>
+<li><strong>当多个对象间的引用出现环的时候就是循环引用</strong><br></li>
+</ul></li>
+<li><strong>问题</strong><br>
+
+<ul>
+<li><strong>环中的所有对象都是方法释放不了</strong><br></li>
+</ul></li>
+<li><strong>解决方案</strong><br>
+
+<ul>
+<li><strong>当出现循环引用的时候，一端必须使用__weak</strong><br></li>
+</ul></li>
+</ul></li>
+<li><strong>@property的使用</strong><br>
+
+<ul>
+<li><strong>内存管理</strong><br>
+
+<ul>
+<li><strong>assign</strong><br>
+
+<ul>
+<li><strong>不参与内存管理，用于基本数据类型</strong><br></li>
+</ul></li>
+<li><strong>strong</strong><br>
+
+<ul>
+<li><strong>强引用：用于普通对象</strong><br></li>
+</ul></li>
+<li><strong>copy</strong><br>
+
+<ul>
+<li><strong>复制：用于字符串与block</strong><br></li>
+</ul></li>
+<li><strong>weak</strong><br>
+
+<ul>
+<li><strong>弱引用：防止循环引用</strong><br></li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li><strong>自动释放池</strong><br>
+
+<ul>
+<li><strong>通过类方法创建出来的对象都是放在离它最近的方法池中</strong><br></li>
+<li><strong>当自动释放池销毁的时候才会才能解除自动释放对该对象的引用</strong><br></li>
+</ul></li>
+</ul></li>
+</ul>
+
+			          	</article>
+			        </div>
+					</div>
+	      </body>
+	    </html>
+			<script type="text/javascript" src="/var/lib/gems/2.5.0/gems/tocmd-0.4.3/vendor/toc/js/jquery-1.4.4.min.js"></script>
+			<script type="text/javascript" src="/var/lib/gems/2.5.0/gems/tocmd-0.4.3/vendor/toc/js/jquery.ztree.all-3.5.min.js"></script>
+			<script type="text/javascript" src="/var/lib/gems/2.5.0/gems/tocmd-0.4.3/vendor/toc/js/ztree_toc.js"></script>
+			<SCRIPT type="text/javascript" >
+			<!--
+			$(document).ready(function(){
+				$('#tree').ztree_toc({
+					is_auto_number:true,
+					documment_selector:'.markdown-body'
+				});
+			});
+			//-->
+			</SCRIPT>
+	  

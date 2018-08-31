@@ -1,0 +1,891 @@
+
+	    <html>
+	      <head>
+				  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	        <title>【掌握】集合类【容器类】</title>
+					
+					<link href="/var/lib/gems/2.5.0/gems/tocmd-0.4.3/vendor/toc/style/github-bf51422f4bb36427d391e4b75a1daa083c2d840e.css" media="all" rel="stylesheet" type="text/css"/>
+					<link href="/var/lib/gems/2.5.0/gems/tocmd-0.4.3/vendor/toc/style/github2-d731afd4f624c99a4b19ad69f3083cd6d02b81d5.css" media="all" rel="stylesheet" type="text/css"/>
+					<link href="/var/lib/gems/2.5.0/gems/tocmd-0.4.3/vendor/toc/css/zTreeStyle/zTreeStyle.css" media="all" rel="stylesheet" type="text/css"/>
+			
+				  <style>
+					pre {
+					    counter-reset: line-numbering;
+					    border: solid 1px #d9d9d9;
+					    border-radius: 0;
+					    background: #fff;
+					    padding: 0;
+					    line-height: 23px;
+					    margin-bottom: 30px;
+					    white-space: pre;
+					    overflow-x: auto;
+					    word-break: inherit;
+					    word-wrap: inherit;
+					}
+
+					pre a::before {
+					  content: counter(line-numbering);
+					  counter-increment: line-numbering;
+					  padding-right: 1em; /* space after numbers */
+					  width: 25px;
+					  text-align: right;
+					  opacity: 0.7;
+					  display: inline-block;
+					  color: #aaa;
+					  background: #eee;
+					  margin-right: 16px;
+					  padding: 2px 10px;
+					  font-size: 13px;
+					  -webkit-touch-callout: none;
+					  -webkit-user-select: none;
+					  -khtml-user-select: none;
+					  -moz-user-select: none;
+					  -ms-user-select: none;
+					  user-select: none;
+					}
+
+					pre a:first-of-type::before {
+					  padding-top: 10px;
+					}
+
+					pre a:last-of-type::before {
+					  padding-bottom: 10px;
+					}
+
+					pre a:only-of-type::before {
+					  padding: 10px;
+					}
+			
+					.highlight { background-color: #ffffcc } /* RIGHT */
+					</style>
+	      </head>
+	      <body>
+				  <div>
+							<div style='width:25%;'>
+									<ul id="tree" class="ztree" style='width:100%'>
+		
+									</ul>
+							</div>
+			        <div id='readme' style='width:70%;margin-left:20%;'>
+			          	<article class='markdown-body'>
+			            	<style>.highlight .hll { background-color: #ffffcc }
+.highlight  { background: #f0f0f0; }
+.highlight .c { color: #60a0b0; font-style: italic } /* Comment */
+.highlight .err { border: 1px solid #FF0000 } /* Error */
+.highlight .k { color: #007020; font-weight: bold } /* Keyword */
+.highlight .o { color: #666666 } /* Operator */
+.highlight .ch { color: #60a0b0; font-style: italic } /* Comment.Hashbang */
+.highlight .cm { color: #60a0b0; font-style: italic } /* Comment.Multiline */
+.highlight .cp { color: #007020 } /* Comment.Preproc */
+.highlight .cpf { color: #60a0b0; font-style: italic } /* Comment.PreprocFile */
+.highlight .c1 { color: #60a0b0; font-style: italic } /* Comment.Single */
+.highlight .cs { color: #60a0b0; background-color: #fff0f0 } /* Comment.Special */
+.highlight .gd { color: #A00000 } /* Generic.Deleted */
+.highlight .ge { font-style: italic } /* Generic.Emph */
+.highlight .gr { color: #FF0000 } /* Generic.Error */
+.highlight .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.highlight .gi { color: #00A000 } /* Generic.Inserted */
+.highlight .go { color: #888888 } /* Generic.Output */
+.highlight .gp { color: #c65d09; font-weight: bold } /* Generic.Prompt */
+.highlight .gs { font-weight: bold } /* Generic.Strong */
+.highlight .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.highlight .gt { color: #0044DD } /* Generic.Traceback */
+.highlight .kc { color: #007020; font-weight: bold } /* Keyword.Constant */
+.highlight .kd { color: #007020; font-weight: bold } /* Keyword.Declaration */
+.highlight .kn { color: #007020; font-weight: bold } /* Keyword.Namespace */
+.highlight .kp { color: #007020 } /* Keyword.Pseudo */
+.highlight .kr { color: #007020; font-weight: bold } /* Keyword.Reserved */
+.highlight .kt { color: #902000 } /* Keyword.Type */
+.highlight .m { color: #40a070 } /* Literal.Number */
+.highlight .s { color: #4070a0 } /* Literal.String */
+.highlight .na { color: #4070a0 } /* Name.Attribute */
+.highlight .nb { color: #007020 } /* Name.Builtin */
+.highlight .nc { color: #0e84b5; font-weight: bold } /* Name.Class */
+.highlight .no { color: #60add5 } /* Name.Constant */
+.highlight .nd { color: #555555; font-weight: bold } /* Name.Decorator */
+.highlight .ni { color: #d55537; font-weight: bold } /* Name.Entity */
+.highlight .ne { color: #007020 } /* Name.Exception */
+.highlight .nf { color: #06287e } /* Name.Function */
+.highlight .nl { color: #002070; font-weight: bold } /* Name.Label */
+.highlight .nn { color: #0e84b5; font-weight: bold } /* Name.Namespace */
+.highlight .nt { color: #062873; font-weight: bold } /* Name.Tag */
+.highlight .nv { color: #bb60d5 } /* Name.Variable */
+.highlight .ow { color: #007020; font-weight: bold } /* Operator.Word */
+.highlight .w { color: #bbbbbb } /* Text.Whitespace */
+.highlight .mb { color: #40a070 } /* Literal.Number.Bin */
+.highlight .mf { color: #40a070 } /* Literal.Number.Float */
+.highlight .mh { color: #40a070 } /* Literal.Number.Hex */
+.highlight .mi { color: #40a070 } /* Literal.Number.Integer */
+.highlight .mo { color: #40a070 } /* Literal.Number.Oct */
+.highlight .sa { color: #4070a0 } /* Literal.String.Affix */
+.highlight .sb { color: #4070a0 } /* Literal.String.Backtick */
+.highlight .sc { color: #4070a0 } /* Literal.String.Char */
+.highlight .dl { color: #4070a0 } /* Literal.String.Delimiter */
+.highlight .sd { color: #4070a0; font-style: italic } /* Literal.String.Doc */
+.highlight .s2 { color: #4070a0 } /* Literal.String.Double */
+.highlight .se { color: #4070a0; font-weight: bold } /* Literal.String.Escape */
+.highlight .sh { color: #4070a0 } /* Literal.String.Heredoc */
+.highlight .si { color: #70a0d0; font-style: italic } /* Literal.String.Interpol */
+.highlight .sx { color: #c65d09 } /* Literal.String.Other */
+.highlight .sr { color: #235388 } /* Literal.String.Regex */
+.highlight .s1 { color: #4070a0 } /* Literal.String.Single */
+.highlight .ss { color: #517918 } /* Literal.String.Symbol */
+.highlight .bp { color: #007020 } /* Name.Builtin.Pseudo */
+.highlight .fm { color: #06287e } /* Name.Function.Magic */
+.highlight .vc { color: #bb60d5 } /* Name.Variable.Class */
+.highlight .vg { color: #bb60d5 } /* Name.Variable.Global */
+.highlight .vi { color: #bb60d5 } /* Name.Variable.Instance */
+.highlight .vm { color: #bb60d5 } /* Name.Variable.Magic */
+.highlight .il { color: #40a070 } /* Literal.Number.Integer.Long */</style>
+<h1>Foundation</h1>
+
+<h2>【掌握】集合类【容器类】</h2>
+
+<h3>字典【理解】</h3>
+
+<ul>
+<li>【掌握】概念：字典是一个无序的集合，它使通过键值对的方式来存储数据的<br></li>
+<li>【掌握】特点<br>
+
+<ul>
+<li>一个 key(键) 对应 一个value(值)<br></li>
+<li>做key的元素必须遵守NSCopying<br>
+我们一般使用NSString作为key<br></li>
+</ul></li>
+<li><p>【理解】NSDictionary  </p>
+
+<ul>
+<li>【掌握】概念：不可变字典，字典创建后里面的元素不可改变<br></li>
+<li>【掌握】创建<br>
+
+<ul>
+<li>通过简介构造方法[【少用】<br>
+
+<ul>
+<li> NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:@1,@&quot;a&quot;,@2,@&quot;b&quot;,@3,@&quot;c&quot;,nil];<br></li>
+</ul></li>
+<li>通过初始化方法【少用】<br>
+
+<ul>
+<li>[[NSDictionary alloc] initWithObjects:values forKeys:keys];<br></li>
+</ul></li>
+<li>快捷的创建方法[字面量]【常用】<br>
+
+<ul>
+<li>NSDictionary *dict =  @{@&quot;a&quot;:@1,@&quot;b&quot;:@2,@&quot;c&quot;:@3};<br></li>
+</ul></li>
+</ul></li>
+<li>【掌握】获取字典的长度<br>
+字典中有多个键值对<br>
+
+<ul>
+<li>dict.count<br></li>
+<li>[dict count]<br></li>
+</ul></li>
+<li>【掌握】获取某个key对应的元素<br>
+
+<ul>
+<li>[dict objectForKey:@&quot;a&quot;];<br></li>
+<li> dict[@&quot;a&quot;];<br></li>
+</ul></li>
+<li><p>【理解】遍历  </p>
+
+<ul>
+<li>【理解】先取出所有的key 或所有的值<br>
+然后通过遍历数组的方式来遍历<br>
+
+<ul>
+<li>[dict allKeys]<br></li>
+<li>[dict allValues]<br></li>
+</ul></li>
+<li><p>【理解】forin[常用]  </p>
+
+<ul>
+<li><div class="highlight"><pre><span></span> <span class="bp">NSDictionary</span> <span class="o">*</span><span class="n">dict</span> <span class="o">=</span> <span class="l">@{</span><span class="s">@&quot;a&quot;</span><span class="o">:</span><span class="mi">@1</span><span class="p">,</span><span class="s">@&quot;b&quot;</span><span class="o">:</span><span class="mi">@2</span><span class="p">,</span><span class="s">@&quot;c&quot;</span><span class="o">:</span><span class="mi">@3</span><span class="l">}</span><span class="p">;</span>  
+
+    <span class="k">for</span> <span class="p">(</span><span class="bp">NSString</span> <span class="o">*</span><span class="n">key</span> <span class="k">in</span> <span class="n">dict</span><span class="p">)</span> <span class="p">{</span>  
+        <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;%@-%@&quot;</span><span class="p">,</span><span class="n">key</span><span class="p">,</span><span class="n">dict</span><span class="p">[</span><span class="n">key</span><span class="p">]);</span>  
+    <span class="p">}</span>  
+</pre></div></li>
+</ul></li>
+<li><p>【理解】block方式[比较常用]  </p>
+
+<ul>
+<li><p>[dict enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {  </p>
+<div class="highlight"><pre><span></span>        <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;key = %@,value = %@&quot;</span><span class="p">,</span><span class="n">key</span><span class="p">,</span><span class="n">obj</span><span class="p">);</span>  
+
+    <span class="p">}];</span>  
+</pre></div></li>
+</ul></li>
+<li><p>【了解】通过枚举器的方式  </p>
+
+<ul>
+<li> NSEnumerator * enumer  =  [dict keyEnumerator];<br>
+ NSString *key;<br>
+ while (key = [enumer nextObject]) {<br>
+            NSLog(@&quot;key = %@,value = %@&quot;,key,dict[key]);<br>
+ }<br></li>
+<li>取出值的枚举器    [dict objectEnumerator];<br></li>
+</ul></li>
+</ul></li>
+<li><p>字典与文件  </p>
+
+<ul>
+<li>写入文件<br>
+
+<ul>
+<li>[dict writeToFile:@&quot;/Users/lideshan/Desktop/test.plist&quot; atomically:YES];<br></li>
+</ul></li>
+<li>从文件中读取<br>
+
+<ul>
+<li>[NSDictionary dictionaryWithContentsOfFile:@&quot;/Users/lideshan/Desktop/test.plist&quot;];<br></li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li><p>【理解】NSMutableDictionary  </p>
+
+<ul>
+<li>【掌握】可变字典，继承NSDictionary，可以对其中的元素进行增删改<br></li>
+<li>【掌握】创建<br>
+
+<ul>
+<li> [NSMutableDictionary dictionary];<br></li>
+<li> [NSMutableDictionary dictionaryWithCapacity:10]<br></li>
+</ul></li>
+<li>【理解】添加或修改元素<br>
+
+<ul>
+<li> [dictM setObject:@4 forKey:@&quot;d&quot;];<br></li>
+<li>  dictM[@&quot;a&quot;] = @10;<br></li>
+</ul></li>
+<li>【理解】删除元素<br>
+
+<ul>
+<li>删除某个key对应的键值对<br>
+
+<ul>
+<li>[dictM removeObjectForKey:@&quot;a&quot;]<br></li>
+</ul></li>
+<li>删除数组中所有的key对应的键值对<br>
+
+<ul>
+<li>[dictM removeObjectsForKeys:@[@&quot;a&quot;,@&quot;b&quot;]];<br></li>
+</ul></li>
+<li>删除字典中所有元素<br>
+
+<ul>
+<li>[dictM removeAllObjects];<br></li>
+</ul></li>
+</ul></li>
+<li>【理解】遍历的同时删除元素<br>
+
+<ul>
+<li>字典不支持遍历同时删除元素<br></li>
+<li>可以先通过遍历的方式找出所有要删除的key，放在数组中，然后通过 removeObjectsForKeys:来删除<br></li>
+</ul></li>
+</ul></li>
+</ul>
+
+<h3>Set【了解】</h3>
+
+<ul>
+<li>特点：无序，元素不可以重复，可以用快速去除数组中的重复元素，效率比数组要高<br></li>
+<li>NSSet<br>
+
+<ul>
+<li>特点：不可以变，一经创建不能增删改<br></li>
+<li>创建<br>
+
+<ul>
+<li>通过数组创建<br>
+如数组有重复的元素该方法会去重<br>
+
+<ul>
+<li> [NSSet setWithArray:array]<br></li>
+</ul></li>
+<li> [NSSet setWithObjects:@1,@2,@3,nil];<br></li>
+<li>注意：不能通过简便的方式[字面量]创建<br></li>
+</ul></li>
+<li>判断是否包含某个元素<br>
+
+<ul>
+<li>[set containsObject:@1];<br></li>
+</ul></li>
+<li>遍历<br>
+
+<ul>
+<li>forin【 常用】<br>
+
+<ul>
+<li> for (NSNumber *num in set) {<br>
+            NSLog(@&quot;%@&quot;,num);<br>
+ }<br></li>
+</ul></li>
+<li>通过枚举器【少用】<br>
+
+<ul>
+<li>NSEnumerator *enumer = [set objectEnumerator];<br>
+NSNumber *number;<br>
+while (number = [enumer nextObject]) {<br>
+    NSLog(@&quot;%@&quot;,number);<br>
+}<br></li>
+</ul></li>
+</ul></li>
+<li>NSSet 与 NSArray 之间的转换<br>
+
+<ul>
+<li>NSArray 转 NSSet<br>
+
+<ul>
+<li>   NSSet *set = [NSSet setWithArray:array]<br></li>
+</ul></li>
+<li>NSSet 转 NSArray<br>
+
+<ul>
+<li>   NSArray *array = [set  allObjects];<br></li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li>NSMutableSet<br>
+
+<ul>
+<li>特点：可以增删元素<br></li>
+<li>创建<br>
+
+<ul>
+<li> [NSMutableSet set];<br></li>
+<li> [NSMutableSet setWithCapacity:10];<br></li>
+</ul></li>
+<li>添加<br>
+
+<ul>
+<li>[setM addObject:@1];<br></li>
+</ul></li>
+<li>删除<br>
+
+<ul>
+<li>[setM removeObject:@1];<br></li>
+</ul></li>
+</ul></li>
+</ul>
+
+<h3>【掌握】集合类之间的转换</h3>
+
+<ul>
+<li>NSArray 转 NSMutableArray<br>
+
+<ul>
+<li>[NSMutableArray arrayWithArray:array];<br></li>
+</ul></li>
+<li>NSDictionary 转 NSMutableDictionary<br>
+
+<ul>
+<li>[NSMutableDictionary dictionaryWithDictionary:dict];<br></li>
+</ul></li>
+<li>NSSet 转  NSMutableSet<br>
+
+<ul>
+<li> [NSMutableSet setWithSet:set];<br></li>
+</ul></li>
+<li> NSArray 转 NSSet<br>
+
+<ul>
+<li>NSSet *set = [NSSet setWithArray:array];<br></li>
+</ul></li>
+<li> NSSet 转 NSArray<br>
+
+<ul>
+<li>NSArray *array = [set allObjects]<br></li>
+</ul></li>
+<li>NSDictionary 转 NSArray<br>
+
+<ul>
+<li> NSArray * keys = [dict allKeys];<br>
+ NSArray * values = [dict allValues];<br></li>
+</ul></li>
+</ul>
+
+<h3>【掌握】集合类中的内存管理</h3>
+
+<ul>
+<li>MRC<br>
+
+<ul>
+<li>当你把一个对象放在集合类中的时候，集合会对这个对象进行一次retain操作<br></li>
+<li>当你把一个对象从集合类移除的时候，集合会对这个对象进行一次<br></li>
+<li>当集合销毁的时候，会对集合类中的所有对象进行一次release的操作<br></li>
+</ul></li>
+<li>ARC<br>
+
+<ul>
+<li>当你把一个对象添加到集合中，集合会对这个对象有一个强引用<br></li>
+<li>当你吧一个对象从集合中移除的时候，集合会释放掉对这个对象的强引用<br></li>
+<li>当集合销毁的时候，会释放掉集合中所有对象的强引用<br></li>
+</ul></li>
+</ul>
+
+<h2>【掌握】常用结构体</h2>
+
+<h3>NSRange</h3>
+
+<ul>
+<li>表示一个区间<br></li>
+<li>location 表示起点<br>
+length   表示长度<br></li>
+</ul>
+
+<h3>NSPoint/CGPoint</h3>
+
+<ul>
+<li>表示平面上一个点<br></li>
+<li>x 表示x坐标<br>
+y 表示y坐标<br></li>
+</ul>
+
+<h3>NSSize/CGSize</h3>
+
+<ul>
+<li>表示尺寸(大小)<br></li>
+<li>width  宽<br>
+height 高<br></li>
+</ul>
+
+<h3>NSRect/CGRect</h3>
+
+<ul>
+<li>表示平面上的一个区域<br></li>
+<li>origin 位置(CGPoint)<br>
+size   尺寸(CGSize)<br></li>
+</ul>
+
+<h3>创建方法【掌握】</h3>
+
+<ul>
+<li> CGPoint创建<br>
+
+<ul>
+<li> CGPointMake(CGFloat x, CGFloat y)<br></li>
+</ul></li>
+<li>CGSize创建<br>
+
+<ul>
+<li>CGSizeMake(CGFloat width, CGFloat height)<br></li>
+</ul></li>
+<li>CGRectMake 创建<br>
+
+<ul>
+<li>  CGRectMake(CGFloat x, CGFloat y, CGFloat width, CGFloat height)<br></li>
+</ul></li>
+</ul>
+
+<h3>结构体转字符串【理解】</h3>
+
+<ul>
+<li>NSRange转字符串<br>
+
+<ul>
+<li>NSStringFromRange(NSRange range)<br></li>
+</ul></li>
+<li>NSPoint转字符串<br>
+
+<ul>
+<li>NSStringFromPoint(NSPoint aPoint)<br></li>
+</ul></li>
+<li>NSSize转字符串<br>
+
+<ul>
+<li>NSStringFromSize(NSSize aSize)<br></li>
+</ul></li>
+<li>NSRect 转字符串<br>
+
+<ul>
+<li> NSStringFromRect(NSRect aRect)<br></li>
+</ul></li>
+</ul>
+
+<h2>【掌握】基本数据类型包装类NSNumber</h2>
+
+<h3>基本类转包装类型</h3>
+
+<ul>
+<li> [NSNumber numberWithInt:(int)];<br>
+ [NSNumber numberWithChar:(char)];<br>
+ [NSNumber numberWithDouble:(double)];<br>
+ [NSNumber numberWithFloat:(float)];<br>
+ [NSNumber numberWithBool:(BOOL)];<br></li>
+</ul>
+
+<h3>包装类型转基本类型</h3>
+
+<ul>
+<li> number.intValue;<br>
+ number.floatValue;<br>
+ number.doubleValue;<br>
+ number.charValue;<br>
+ number.boolValue<br></li>
+</ul>
+
+<h2>【掌握】 结构体的包装类NSValue</h2>
+
+<h3>结构体转NSValue</h3>
+
+<ul>
+<li>常见结构体转换<br>
+
+<ul>
+<li> [NSValue valueWithRange:(NSRange)];<br>
+ [NSValue valueWithPoint:(NSPoint)];<br>
+ [NSValue valueWithSize:(NSSize)];<br>
+ [NSValue valueWithRect:(NSRect)];<br></li>
+</ul></li>
+<li>自定义结构体转换<br>
+
+<ul>
+<li>[NSValue valueWithBytes:(const void *) value objCType:(const char *)] type]<br>
+value 普通的结构体指针<br>
+type  @encode(C语言的结构体类型)<br></li>
+<li>typedef struct {<br>
+     double width;<br>
+     double height;<br>
+ } MYSize;<br>
+ MYSize size = {2,10};<br>
+ NSValue *value = [NSValue valueWithBytes:&amp;size objCType:@encode(MYSize)];<br></li>
+</ul></li>
+</ul>
+
+<h3>NSValue 转结构体</h3>
+
+<ul>
+<li>常见结构转换<br>
+
+<ul>
+<li>value.rangeValue;<br>
+value.pointValue;<br>
+value.sizeValue;<br>
+value.rectValue;<br></li>
+</ul></li>
+<li>自定义结构体转换<br>
+
+<ul>
+<li>[value getValue:&amp;size];<br></li>
+</ul></li>
+</ul>
+
+<h2>【理解】 NSDate</h2>
+
+<h3>【掌握】创建日期</h3>
+
+<ul>
+<li> NSDate *date = [NSDate date];<br></li>
+<li>+ (instancetype)dateWithTimeIntervalSinceNow:(NSTimeInterval)secs;<br></li>
+<li> NSDate *da = [[NSDate alloc] init];<br></li>
+<li> NSLog(@&quot;%@&quot;,date); 输出的时间是格林威治标准时间<br>
+  本初子午线穿过哪里<br></li>
+</ul>
+
+<h3>【掌握】日期格式化</h3>
+
+<ul>
+<li>//      创建日期<br>
+        NSDate *date = [NSDate date];<br>
+//      创建日期格式化器<br>
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];<br>
+//      设置日期格式<br>
+        formatter.dateFormat = @&quot;yyyy年MM月dd日  HH时mm分ss秒 Z&quot;;<br>
+//      yyyy:年 MM:月 dd:日 hh:时 mm:分 ss:秒 Z代表时区<br>
+//      将日期转换为指定格式的字符串<br>
+        NSString *dateStr = [formatter stringFromDate:date];<br>
+        NSLog(@&quot;%@&quot;,dateStr);<br>
+//      将格式字符串转为日期<br>
+        NSDate *newDate  = [formatter dateFromString:dateStr];<br>
+        NSLog(@&quot;%@&quot;,newDate);<br></li>
+</ul>
+
+<h3>【理解】日期比较</h3>
+
+<ul>
+<li>判断两个日期是否相同<br>
+
+<ul>
+<li>     BOOL isEqual =  [date1 isEqualToDate:date2];<br></li>
+</ul></li>
+<li>日期比较<br>
+
+<ul>
+<li> NSComparisonResult res = [date1 compare:date2];<br></li>
+</ul></li>
+<li>返回两个日期中较早一个<br>
+
+<ul>
+<li>  NSDate * earlierDate =  [date1 earlierDate:date2];<br></li>
+</ul></li>
+<li>返回两个日期中较晚的一个<br>
+
+<ul>
+<li> NSDate *laterDate = [date1 laterDate:date2];<br></li>
+</ul></li>
+</ul>
+
+<h3>【理解】NSCalendar</h3>
+
+<ul>
+<li>日历：主要用于日期的计算<br></li>
+<li>取出日期的某一部分<br>
+
+<ul>
+<li>   // 1.当前时间<br>
+    NSDate *now = [NSDate date];<br>
+    // 2.创建一个日历对象<br>
+    NSCalendar *calendar = [NSCalendar currentCalendar];<br>
+    // 3.利用日历对象 或者 时间对象 对应的 年、月、日、时分秒<br>
+    int unit = NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay;<br>
+    NSDateComponents *cmps = [calendar components:unit fromDate:now];<br>
+    // 4.打印时间的要素<br>
+    NSLog(@&quot;%ld&quot;, cmps.day);<br></li>
+</ul></li>
+<li><p>计算两个日期之间相差的时间  </p>
+
+<ul>
+<li><div class="highlight"><pre><span></span>    <span class="bp">NSString</span> <span class="o">*</span><span class="n">time1</span> <span class="o">=</span> <span class="s">@&quot;2014-12-08 20:50:40&quot;</span><span class="p">;</span>  
+    <span class="bp">NSString</span> <span class="o">*</span><span class="n">time2</span> <span class="o">=</span> <span class="s">@&quot;2014-12-04 18:45:30&quot;</span><span class="p">;</span>  
+
+    <span class="bp">NSDateFormatter</span> <span class="o">*</span><span class="n">fmt</span> <span class="o">=</span> <span class="p">[[</span><span class="bp">NSDateFormatter</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">init</span><span class="p">];</span>  
+    <span class="n">fmt</span><span class="p">.</span><span class="n">dateFormat</span> <span class="o">=</span> <span class="s">@&quot;yyyy-MM-dd HH:mm:ss&quot;</span><span class="p">;</span>  
+
+    <span class="bp">NSDate</span> <span class="o">*</span><span class="n">date1</span> <span class="o">=</span> <span class="p">[</span><span class="n">fmt</span> <span class="nl">dateFromString</span><span class="p">:</span><span class="n">time1</span><span class="p">];</span>  
+    <span class="bp">NSDate</span> <span class="o">*</span><span class="n">date2</span> <span class="o">=</span> <span class="p">[</span><span class="n">fmt</span> <span class="nl">dateFromString</span><span class="p">:</span><span class="n">time2</span><span class="p">];</span>  
+
+    <span class="c1">// 1.创建一个日历对象  </span>
+    <span class="bp">NSCalendar</span> <span class="o">*</span><span class="n">calendar</span> <span class="o">=</span> <span class="p">[</span><span class="bp">NSCalendar</span> <span class="n">currentCalendar</span><span class="p">];</span>  
+
+    <span class="c1">// 2.比较时间的差距  </span>
+    <span class="kt">int</span> <span class="n">unit</span> <span class="o">=</span> <span class="n">NSCalendarUnitYear</span> <span class="o">|</span> <span class="n">NSCalendarUnitMonth</span> <span class="o">|</span> <span class="n">NSCalendarUnitDay</span>  
+    <span class="o">|</span> <span class="n">NSCalendarUnitHour</span> <span class="o">|</span> <span class="n">NSCalendarUnitMinute</span> <span class="o">|</span> <span class="n">NSCalendarUnitSecond</span><span class="p">;</span>  
+    <span class="bp">NSDateComponents</span> <span class="o">*</span><span class="n">cmps</span> <span class="o">=</span> <span class="p">[</span><span class="n">calendar</span> <span class="nl">components</span><span class="p">:</span><span class="n">unit</span> <span class="nl">fromDate</span><span class="p">:</span><span class="n">date2</span> <span class="nl">toDate</span><span class="p">:</span><span class="n">date1</span> <span class="nl">options</span><span class="p">:</span><span class="mi">0</span><span class="p">];</span>  
+
+    <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;相差%ld年%ld月%ld天%ld小时%ld分钟%ld秒&quot;</span><span class="p">,</span> <span class="n">cmps</span><span class="p">.</span><span class="n">year</span><span class="p">,</span> <span class="n">cmps</span><span class="p">.</span><span class="n">month</span><span class="p">,</span> <span class="n">cmps</span><span class="p">.</span><span class="n">day</span><span class="p">,</span> <span class="n">cmps</span><span class="p">.</span><span class="n">hour</span><span class="p">,</span> <span class="n">cmps</span><span class="p">.</span><span class="n">minute</span><span class="p">,</span> <span class="n">cmps</span><span class="p">.</span><span class="n">second</span><span class="p">);</span>  
+</pre></div></li>
+</ul></li>
+<li><p>在原来的日期的基础上添加时间  </p>
+
+<ul>
+<li>  NSDate *newDate  =  [calendar dateByAddingComponents:cmps toDate:date options:NSCalendarMatchStrictly];<br></li>
+</ul></li>
+<li><p>获取当前的日历对象  </p>
+
+<ul>
+<li>  NSCalendar *calendar = [NSCalendar currentCalendar];<br></li>
+</ul></li>
+</ul>
+
+<h2>【理解】文件操作</h2>
+
+<h3>【理解】文件管理器NSFileManager</h3>
+
+<ul>
+<li>概念:该类是一个单例类，用于文件相关的操作<br></li>
+<li>获取文件管理器<br>
+
+<ul>
+<li>NSFileManager * defaultManager = [NSFileManager defaultManager];<br></li>
+</ul></li>
+<li>【理解】判断是该路径下是否存在文件或文件夹<br>
+
+<ul>
+<li>  BOOL isExist = [fileManager fileExistsAtPath:path];<br></li>
+<li>BOOL isDir = NO;<br>
+BOOL isExist = [fileManager fileExistsAtPath:path isDirectory:&amp;isDir];<br>
+如果是目录isDir的值为YES,<br>
+注意：1、这里传入的是一个BOOL类型的变量的地址<br>
+            2、只有文件存在才会判断他是路径还是文件，如果路径或文件不存两个值都是NO<br></li>
+</ul></li>
+<li>【了解】文件权限<br>
+
+<ul>
+<li>判断文件是否可读的<br>
+
+<ul>
+<li>BOOL isReadable = [fileManager isReadableFileAtPath:path];<br></li>
+</ul></li>
+<li>判断文件是否是可写的<br>
+
+<ul>
+<li>BOOL isWritable = [fileManager isWritableFileAtPath:path];<br></li>
+</ul></li>
+</ul></li>
+<li>【了解】获取文件或目录的属性<br>
+
+<ul>
+<li>NSFileManager *fileManager = [NSFileManager defaultManager];<br>
+NSString *path = @&quot;/Users/lideshan/Desktop&quot;;<br>
+NSError *error;<br>
+NSDictionary *dict = [fileManager  attributesOfItemAtPath:path error:&amp;error];<br>
+NSLog(@&quot;%@&quot;,dict);<br>
+NSLog(@&quot;%@&quot;,dict[@&quot;NSFileSize&quot;]);//我们可以通过这个属性获取文件的大小<br>
+NSLog(@&quot;%@&quot;,dict[NSFileSize]);//与上面的方式是等价的，我们通常使用这一种<br></li>
+</ul></li>
+<li>【理解】获取目录的内容<br>
+
+<ul>
+<li>获得当前文件夹下的内容<br>
+
+<ul>
+<li>NSError *error = nil;<br>
+ NSArray *array = [fileManager contentsOfDirectoryAtPath:path error:&amp;error];<br></li>
+</ul></li>
+<li>获得当前文件夹下及其子文件夹的内容<br>
+
+<ul>
+<li>  NSError *error = nil;<br>
+  NSArray *array = [fileManager subpathsOfDirectoryAtPath:path error:&amp;error];<br></li>
+</ul></li>
+</ul></li>
+<li>【理解】拷贝文件(原文件保留)<br>
+
+<ul>
+<li>[fileManager copyItemAtPath:src toPath:dest error:&amp;error];<br></li>
+</ul></li>
+<li>【理解】移动文件(原文件会被删除)<br>
+
+<ul>
+<li> [fileManager moveItemAtPath:src toPath:dest error:&amp;error];<br></li>
+</ul></li>
+<li>【掌握】创建目录<br>
+
+<ul>
+<li> [fileManager createDirectoryAtPath:dest withIntermediateDirectories:NO attributes:nil error:&amp;error];<br>
+withIntermediateDirectories:是否要创建中间目录<br>
+YES 表示创建中间目录<br>
+NO 表示不创建中间目录<br>
+attributes: 是目录的属性信息，nil表示使用默认属性<br></li>
+</ul></li>
+<li>【掌握】创建文件<br>
+
+<ul>
+<li> [fileManager createFileAtPath:dest contents:data attributes:nil];<br></li>
+</ul></li>
+</ul>
+
+<h3>【掌握】NSData</h3>
+
+<ul>
+<li>概念： IOS中二进制文件使用NSData保存<br>
+音频、视频文件必须使用NSData来保存<br></li>
+<li>把文件加载到内存<br>
+
+<ul>
+<li>NSData *data =  [NSData dataWithContentsOfFile:path];<br></li>
+<li>注意：  NSData是不可变的Data类型，只能通过一次加载，完成所有的数据加载<br></li>
+</ul></li>
+<li>把内存中的数据写入到文件中<br>
+
+<ul>
+<li>  [data writeToFile:path atomically:YES];<br></li>
+</ul></li>
+</ul>
+
+<h3>【掌握】NSMutableData</h3>
+
+<ul>
+<li>当你需要把多个NSData数据拼接成一个数据存储的时候，就要使用NSMutableData<br></li>
+<li> NSMutableData *dataM = [NSMutableData data];<br>
+[dataM appendData:data];<br></li>
+</ul>
+
+<h2>【理解】NSObject</h2>
+
+<h3>判断某个实例对象是否实现某个方法</h3>
+
+<ul>
+<li>- (BOOL)respondsToSelector:(SEL)aSelector;<br></li>
+</ul>
+
+<h3>让某个实例对象动态去执行某个方法</h3>
+
+<ul>
+<li>- (id)performSelector:(SEL)aSelector;<br>
+
+<ul>
+<li>(id)performSelector:(SEL)aSelector withObject:(id)object;<br></li>
+<li>(id)performSelector:(SEL)aSelector withObject:(id)object1 withObject:(id)object2;<br></li>
+</ul></li>
+</ul>
+
+<h3>判断一个实例对象是否是一个类的实例对象</h3>
+
+<ul>
+<li>- (BOOL)isMemberOfClass:(Class)aClass;<br></li>
+</ul>
+
+<h3>判断一个实例对象是否是一个类 或其子类的实例对象</h3>
+
+<ul>
+<li>- (BOOL)isKindOfClass:(Class)aClass;<br></li>
+</ul>
+
+<h3>判断一个实例对象是否实现了某个协议</h3>
+
+<ul>
+<li>- (BOOL)conformsToProtocol:(Protocol *)aProtocol;<br></li>
+</ul>
+
+<h2>【理解】复制</h2>
+
+<h3>浅复制</h3>
+
+<ul>
+<li>不会产生新对象的复制<br></li>
+<li>NSString调用copy : 浅复制<br></li>
+<li>如果是不可变对象调用copy方法产出不可变副本，那么不会产生新的对象<br></li>
+</ul>
+
+<h3>深复制</h3>
+
+<ul>
+<li>会产生全新的对象的复制<br></li>
+<li> NSString调用mutableCopy ： 深复制<br></li>
+<li> NSMutableString调用copy ： 深复制<br></li>
+<li> NSMutableString调用mutableCopy ： 深复制<br></li>
+<li>可变对象上调用copy 或 mutableCopy都会产生一个全新的对象，不可变量对象调用 mutableCopy会产生一个新对象<br></li>
+</ul>
+
+<h3>复制与引用计数器</h3>
+
+<ul>
+<li>在MRC中，不可变对象调用copy方法，引用计数+1(NSString除外)，不可变对象调用mutableCopy会产生一个全新的对象引用计数为1，可变对象调用copy 或 mutableCopy都会产生一个全新的对象，引用计数为1<br></li>
+</ul>
+
+<h3>不可变对象</h3>
+
+<ul>
+<li>一经创建不可增加、删除、修改的对象，只要是对对象中内容进行修改添加删除的操作的方法都会返回一个全新的对象，而原来的对象不受影响<br></li>
+<li>NSString,NSArray,NSDictionary,NSSet<br></li>
+</ul>
+
+<h3>可变对象</h3>
+
+<ul>
+<li>创建后可以进行增删改对象，可以在原来的对象的基础上进行增删改，当一个对象中的元素需要经常进行增删改的操作的时候，使用可变对象效率更高<br></li>
+<li>NSMutableString,NSMutableArray,NSMutableDictionary,NSMutableSet<br></li>
+</ul>
+
+			          	</article>
+			        </div>
+					</div>
+	      </body>
+	    </html>
+			<script type="text/javascript" src="/var/lib/gems/2.5.0/gems/tocmd-0.4.3/vendor/toc/js/jquery-1.4.4.min.js"></script>
+			<script type="text/javascript" src="/var/lib/gems/2.5.0/gems/tocmd-0.4.3/vendor/toc/js/jquery.ztree.all-3.5.min.js"></script>
+			<script type="text/javascript" src="/var/lib/gems/2.5.0/gems/tocmd-0.4.3/vendor/toc/js/ztree_toc.js"></script>
+			<SCRIPT type="text/javascript" >
+			<!--
+			$(document).ready(function(){
+				$('#tree').ztree_toc({
+					is_auto_number:true,
+					documment_selector:'.markdown-body'
+				});
+			});
+			//-->
+			</SCRIPT>
+	  
