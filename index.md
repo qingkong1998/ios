@@ -1,37 +1,41 @@
-## Welcome to GitHub Pages
+## iOS开发笔记
 
-You can use the [editor on GitHub](https://github.com/qingkong1998/ios/edit/master/index.md) to maintain and preview the content for your website in Markdown files.
+* [Getting Started with Kingfisher](https://github.com/qingkong/Kingfisher/wiki/Getting-Started-with-Kingfisher.html)
+    * [Install Kingfisher](https://github.com/qingkong/Kingfisher/wiki/Installation-Guide.html)
+    * [Cheat Sheet](https://github.com/qingkong1998/qingkong/wiki/Cheat-Sheet.html)
+* [API Reference](http://qingkong.github.io/qingkong/.html)
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+## Migration Guide
 
-### Markdown
+* [3.0 Migration Guide](https://github.com/onevcat/Kingfisher/wiki/Kingfisher-3.0-Migration-Guide.html)
+* [2.0 Migration Guide](https://github.com/onevcat/Kingfisher/wiki/Kingfisher-2.0-Migration-Guide.html)
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+## 杂项
 
-```markdown
-Syntax highlighted code block
+* [FAQ](https://github.com/onevcat/Kingfisher/wiki/FAQ.html)
+* [Ask a question](http://stackoverflow.com/search?q=kingfisher.html)
+* [windows系统设置SSHKEY公钥](windows下生成githubssh公钥.html)
+* [安装jruby和rails创建 application](安装jruby和rails创建application.html)
+* [windows安装charlock_holmes](https://my.oschina.net/zengde/blog/860672.html)
+* [ICU使用MinGW编译Windows系统](ICU使用MinGW编译Windows系统.html)
+* [windows下最新PHP开发环境配置(Apache+Mysql+PHP.html)](windows下最新PHP开发环境配置Apache+Mysql+PHP).html)
+* [整合Wikitten和MDwiki搭建个人知识库](整合Wikitten和MDwiki搭建个人知识库.html)
+* [windows下配置apache+php环境](windows下配置apache+php环境.html)
+* [一款支持Markdown语法的Wiki知识管理系统Wikitten搭建教程](一款支持Markdown语法的Wiki知识管理系统Wikitten搭建教程.html)
+* [原生成带有目录的Markdown格式文档](原生成带有目录的Markdown格式文档.html)
+* [rubygem本地安装方法](rubygem本地安装方法.html)
+* [](.html)
+* [](.html)
+* [](.html)
+* [](.html)
+* [](.html)
+* [](.html)
 
-# Header 1
-## Header 2
-### Header 3
+## Information
 
-- Bulleted
-- List
+* [CHANGELOG](https://github.com/qingkong1998/qing kong/blob/master/CHANGELOG.md.html)
 
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/qingkong1998/ios/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+> 作者：qingkong
+链接：https://github.com/qingkong1998/ios/wiki
+来源：qingkong
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
