@@ -1,0 +1,352 @@
+
+	    <html>
+	      <head>
+				  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	        <title>安装jruby和rails，创建-application</title>
+					
+					<link href="/var/lib/gems/2.5.0/gems/tocmd-0.4.3/vendor/toc/style/github-bf51422f4bb36427d391e4b75a1daa083c2d840e.css" media="all" rel="stylesheet" type="text/css"/>
+					<link href="/var/lib/gems/2.5.0/gems/tocmd-0.4.3/vendor/toc/style/github2-d731afd4f624c99a4b19ad69f3083cd6d02b81d5.css" media="all" rel="stylesheet" type="text/css"/>
+					<link href="/var/lib/gems/2.5.0/gems/tocmd-0.4.3/vendor/toc/css/zTreeStyle/zTreeStyle.css" media="all" rel="stylesheet" type="text/css"/>
+			
+				  <style>
+					pre {
+					    counter-reset: line-numbering;
+					    border: solid 1px #d9d9d9;
+					    border-radius: 0;
+					    background: #fff;
+					    padding: 0;
+					    line-height: 23px;
+					    margin-bottom: 30px;
+					    white-space: pre;
+					    overflow-x: auto;
+					    word-break: inherit;
+					    word-wrap: inherit;
+					}
+
+					pre a::before {
+					  content: counter(line-numbering);
+					  counter-increment: line-numbering;
+					  padding-right: 1em; /* space after numbers */
+					  width: 25px;
+					  text-align: right;
+					  opacity: 0.7;
+					  display: inline-block;
+					  color: #aaa;
+					  background: #eee;
+					  margin-right: 16px;
+					  padding: 2px 10px;
+					  font-size: 13px;
+					  -webkit-touch-callout: none;
+					  -webkit-user-select: none;
+					  -khtml-user-select: none;
+					  -moz-user-select: none;
+					  -ms-user-select: none;
+					  user-select: none;
+					}
+
+					pre a:first-of-type::before {
+					  padding-top: 10px;
+					}
+
+					pre a:last-of-type::before {
+					  padding-bottom: 10px;
+					}
+
+					pre a:only-of-type::before {
+					  padding: 10px;
+					}
+			
+					.highlight { background-color: #ffffcc } /* RIGHT */
+					</style>
+	      </head>
+	      <body>
+				  <div>
+							<div style='width:25%;'>
+									<ul id="tree" class="ztree" style='width:100%'>
+		
+									</ul>
+							</div>
+			        <div id='readme' style='width:70%;margin-left:20%;'>
+			          	<article class='markdown-body'>
+			            	<style>.highlight .hll { background-color: #ffffcc }
+.highlight  { background: #f0f0f0; }
+.highlight .c { color: #60a0b0; font-style: italic } /* Comment */
+.highlight .err { border: 1px solid #FF0000 } /* Error */
+.highlight .k { color: #007020; font-weight: bold } /* Keyword */
+.highlight .o { color: #666666 } /* Operator */
+.highlight .ch { color: #60a0b0; font-style: italic } /* Comment.Hashbang */
+.highlight .cm { color: #60a0b0; font-style: italic } /* Comment.Multiline */
+.highlight .cp { color: #007020 } /* Comment.Preproc */
+.highlight .cpf { color: #60a0b0; font-style: italic } /* Comment.PreprocFile */
+.highlight .c1 { color: #60a0b0; font-style: italic } /* Comment.Single */
+.highlight .cs { color: #60a0b0; background-color: #fff0f0 } /* Comment.Special */
+.highlight .gd { color: #A00000 } /* Generic.Deleted */
+.highlight .ge { font-style: italic } /* Generic.Emph */
+.highlight .gr { color: #FF0000 } /* Generic.Error */
+.highlight .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.highlight .gi { color: #00A000 } /* Generic.Inserted */
+.highlight .go { color: #888888 } /* Generic.Output */
+.highlight .gp { color: #c65d09; font-weight: bold } /* Generic.Prompt */
+.highlight .gs { font-weight: bold } /* Generic.Strong */
+.highlight .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.highlight .gt { color: #0044DD } /* Generic.Traceback */
+.highlight .kc { color: #007020; font-weight: bold } /* Keyword.Constant */
+.highlight .kd { color: #007020; font-weight: bold } /* Keyword.Declaration */
+.highlight .kn { color: #007020; font-weight: bold } /* Keyword.Namespace */
+.highlight .kp { color: #007020 } /* Keyword.Pseudo */
+.highlight .kr { color: #007020; font-weight: bold } /* Keyword.Reserved */
+.highlight .kt { color: #902000 } /* Keyword.Type */
+.highlight .m { color: #40a070 } /* Literal.Number */
+.highlight .s { color: #4070a0 } /* Literal.String */
+.highlight .na { color: #4070a0 } /* Name.Attribute */
+.highlight .nb { color: #007020 } /* Name.Builtin */
+.highlight .nc { color: #0e84b5; font-weight: bold } /* Name.Class */
+.highlight .no { color: #60add5 } /* Name.Constant */
+.highlight .nd { color: #555555; font-weight: bold } /* Name.Decorator */
+.highlight .ni { color: #d55537; font-weight: bold } /* Name.Entity */
+.highlight .ne { color: #007020 } /* Name.Exception */
+.highlight .nf { color: #06287e } /* Name.Function */
+.highlight .nl { color: #002070; font-weight: bold } /* Name.Label */
+.highlight .nn { color: #0e84b5; font-weight: bold } /* Name.Namespace */
+.highlight .nt { color: #062873; font-weight: bold } /* Name.Tag */
+.highlight .nv { color: #bb60d5 } /* Name.Variable */
+.highlight .ow { color: #007020; font-weight: bold } /* Operator.Word */
+.highlight .w { color: #bbbbbb } /* Text.Whitespace */
+.highlight .mb { color: #40a070 } /* Literal.Number.Bin */
+.highlight .mf { color: #40a070 } /* Literal.Number.Float */
+.highlight .mh { color: #40a070 } /* Literal.Number.Hex */
+.highlight .mi { color: #40a070 } /* Literal.Number.Integer */
+.highlight .mo { color: #40a070 } /* Literal.Number.Oct */
+.highlight .sa { color: #4070a0 } /* Literal.String.Affix */
+.highlight .sb { color: #4070a0 } /* Literal.String.Backtick */
+.highlight .sc { color: #4070a0 } /* Literal.String.Char */
+.highlight .dl { color: #4070a0 } /* Literal.String.Delimiter */
+.highlight .sd { color: #4070a0; font-style: italic } /* Literal.String.Doc */
+.highlight .s2 { color: #4070a0 } /* Literal.String.Double */
+.highlight .se { color: #4070a0; font-weight: bold } /* Literal.String.Escape */
+.highlight .sh { color: #4070a0 } /* Literal.String.Heredoc */
+.highlight .si { color: #70a0d0; font-style: italic } /* Literal.String.Interpol */
+.highlight .sx { color: #c65d09 } /* Literal.String.Other */
+.highlight .sr { color: #235388 } /* Literal.String.Regex */
+.highlight .s1 { color: #4070a0 } /* Literal.String.Single */
+.highlight .ss { color: #517918 } /* Literal.String.Symbol */
+.highlight .bp { color: #007020 } /* Name.Builtin.Pseudo */
+.highlight .fm { color: #06287e } /* Name.Function.Magic */
+.highlight .vc { color: #bb60d5 } /* Name.Variable.Class */
+.highlight .vg { color: #bb60d5 } /* Name.Variable.Global */
+.highlight .vi { color: #bb60d5 } /* Name.Variable.Instance */
+.highlight .vm { color: #bb60d5 } /* Name.Variable.Magic */
+.highlight .il { color: #40a070 } /* Literal.Number.Integer.Long */</style>
+<p><a href="https://www.cnblogs.com/lexus/archive/2012/05/24/2516494.html">安装jruby和rails，创建 application - - ITeye技术网站</a></p>
+
+<p>安装jruby和rails，创建 application 
+博客分类：
+jruby
+jrubyRailsMySQLRackActiveRecord
+1) 安装jruby_windows_1_6_0_RC2.exe</p>
+
+<p>2) 配置环境变量</p>
+
+<p>添加JRUBY_HOME=JRUBY安装路径(例如：D:\software\jruby\jruby\jruby-1.6.0.RC2)，然后在path中加入%JRUBY_HOME%\bin，在cmd下输入</p>
+
+<p>jruby -v</p>
+
+<p>输出：</p>
+
+<p>jruby 1.6.0.RC2 (ruby 1.8.7 patchlevel 330) (2011-02-09 5434c72) (Java HotSpot(TM) Client VM 1.6.0_20) [Windows 7-x86-java]</p>
+
+<p>（注：如果输出不可执行命令，重启cmd试试，如果再不行，path里面直接加入jruby的安装路径\bin）</p>
+
+<p>3）安装rails，在线安装</p>
+
+<p>A)jruby -S gem install activerecord-jdbc-adapter --no-ri --no-rdoc</p>
+
+<p>B)jruby -S gem install jdbc-mysql activerecord-jdbcmysql-adapter --no-ri --no-rdoc</p>
+
+<p>C)jruby -S gem install jruby-openssl --no-ri --no-rdoc</p>
+
+<p>D)jruby -S gem install rails --no-ri --no-rdoc</p>
+
+<p>然后cmd下输入gem list;</p>
+
+<p>所有的安装插件，是否齐全，不全的话，依照下面的插件名安装，安装命令为：gem install 插件名  （例如：gem install abstract）</p>
+
+<p>abstract (1.0.0)</p>
+
+<p>actionmailer (3.0.5, 2.3.8)</p>
+
+<p>actionpack (3.0.5, 2.3.8)</p>
+
+<p>activemodel (3.0.5)</p>
+
+<p>activerecord (3.0.5, 2.3.8)</p>
+
+<p>activerecord-jdbc-adapter (1.1.1)</p>
+
+<p>activerecord-jdbcmysql-adapter (1.1.1)</p>
+
+<p>activeresource (3.0.5, 2.3.8)</p>
+
+<p>activesupport (3.0.5, 2.3.8)</p>
+
+<p>arel (2.0.9)</p>
+
+<p>bouncy-castle-java (1.5.0145.2)</p>
+
+<p>builder (2.1.2)</p>
+
+<p>bundler (1.0.10)</p>
+
+<p>cgi_multipart_eof_fix (2.5.0)</p>
+
+<p>erubis (2.6.6)</p>
+
+<p>gem_plugin (0.2.3)</p>
+
+<p>i18n (0.5.0)</p>
+
+<p>jdbc-mysql (5.1.13)</p>
+
+<p>jdbc-sqlite3 (3.6.14.2.056)</p>
+
+<p>jruby-jars (1.6.0)</p>
+
+<p>jruby-openssl (0.7.3)</p>
+
+<p>jruby-rack (1.0.8)</p>
+
+<p>jruby-win32ole (0.8.3)</p>
+
+<p>mail (2.2.15)</p>
+
+<p>mime-types (1.16)</p>
+
+<p>minitest (1.6.0)</p>
+
+<p>mongrel (1.1.5 x86-mingw32)</p>
+
+<p>mongrel_service (0.4.0)</p>
+
+<p>polyglot (0.3.1)</p>
+
+<p>rack (1.2.2, 1.1.2)</p>
+
+<p>rack-mount (0.6.14)</p>
+
+<p>rack-test (0.5.7)</p>
+
+<p>rails (3.0.5, 2.3.8)</p>
+
+<p>railties (3.0.5)</p>
+
+<p>rake (0.8.7)</p>
+
+<p>rdoc (2.5.8)</p>
+
+<p>rubygems-update (1.6.2)</p>
+
+<p>rubyzip (0.9.4)</p>
+
+<p>sources (0.0.1)</p>
+
+<p>sqlite3 (1.3.3 x86-mingw32)</p>
+
+<p>sqlite3-ruby (1.3.3)</p>
+
+<p>thor (0.14.6)</p>
+
+<p>treetop (1.4.9)</p>
+
+<p>tzinfo (0.3.25)</p>
+
+<p>warbler (1.2.1)</p>
+
+<p>4) 创建application （本机已安装mysql）</p>
+
+<p>jruby -S rails new testapp -d mysql -m http://jruby.org/rails3.rb</p>
+
+<p>打开创建的application</p>
+
+<p>例如我的：E:\testapp\config\database.yml文件，查看下面的内容：</p>
+
+<p>development:</p>
+
+<p>adapter: jdbc  ****</p>
+
+<p>encoding: utf8</p>
+
+<p>reconnect: false</p>
+
+<p>database: testapp_development</p>
+
+<p>pool: 5</p>
+
+<p>username: root</p>
+
+<p>password:</p>
+
+<h1>host: localhost</h1>
+
+<p>driver: com.mysql.jdbc.Driver  ****</p>
+
+<p>url: jdbc:mysql://localhost:3306/testapp_development  *****</p>
+
+<p>带有* 号的这几行看看你的是否生成对了？？？</p>
+
+<p>然后在你的mysql中创建数据库名为testapp_development </p>
+
+<p>5）（可能防火墙会阻止，如果阻止的话，要先关掉防火墙）</p>
+
+<p>jruby -S bundle install</p>
+
+<p>jruby -S rake db:migrate</p>
+
+<p>jruby -S rails s</p>
+
+<p>输出：</p>
+
+<p>=&gt; Booting WEBrick</p>
+
+<p>=&gt; Rails 3.0.3 application starting in development on http://0.0.0.0:3000</p>
+
+<p>=&gt; Call with -d to detach</p>
+
+<p>=&gt; Ctrl-C to shutdown server</p>
+
+<p>[2011-01-09 10:25:08] INFO  WEBrick 1.3.1</p>
+
+<p>[2011-01-09 10:25:08] INFO  ruby 1.8.7 (2010-12-03)</p>
+
+<p>[2011-01-09 10:25:08] INFO  WEBrick::HTTPServer#start: pid=52852 port=3000</p>
+
+<p>6）之后打开浏览器</p>
+
+<p>输入：http://127.0.0.1:3000/</p>
+
+<p>你将会看到</p>
+
+<p>之后就是导入到netbeans中编写代码了，</p>
+
+<p>在netbeans中新建项目，选择最后一项：如图：</p>
+
+<p>寻找到项目testapp正确路径，点击完成即可；</p>
+
+			          	</article>
+			        </div>
+					</div>
+	      </body>
+	    </html>
+			<script type="text/javascript" src="/var/lib/gems/2.5.0/gems/tocmd-0.4.3/vendor/toc/js/jquery-1.4.4.min.js"></script>
+			<script type="text/javascript" src="/var/lib/gems/2.5.0/gems/tocmd-0.4.3/vendor/toc/js/jquery.ztree.all-3.5.min.js"></script>
+			<script type="text/javascript" src="/var/lib/gems/2.5.0/gems/tocmd-0.4.3/vendor/toc/js/ztree_toc.js"></script>
+			<SCRIPT type="text/javascript" >
+			<!--
+			$(document).ready(function(){
+				$('#tree').ztree_toc({
+					is_auto_number:true,
+					documment_selector:'.markdown-body'
+				});
+			});
+			//-->
+			</SCRIPT>
+	  

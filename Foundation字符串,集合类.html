@@ -1,0 +1,845 @@
+
+	    <html>
+	      <head>
+				  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	        <title>Foundation字符串,集合类</title>
+					
+					<link href="/var/lib/gems/2.5.0/gems/tocmd-0.4.3/vendor/toc/style/github-bf51422f4bb36427d391e4b75a1daa083c2d840e.css" media="all" rel="stylesheet" type="text/css"/>
+					<link href="/var/lib/gems/2.5.0/gems/tocmd-0.4.3/vendor/toc/style/github2-d731afd4f624c99a4b19ad69f3083cd6d02b81d5.css" media="all" rel="stylesheet" type="text/css"/>
+					<link href="/var/lib/gems/2.5.0/gems/tocmd-0.4.3/vendor/toc/css/zTreeStyle/zTreeStyle.css" media="all" rel="stylesheet" type="text/css"/>
+			
+				  <style>
+					pre {
+					    counter-reset: line-numbering;
+					    border: solid 1px #d9d9d9;
+					    border-radius: 0;
+					    background: #fff;
+					    padding: 0;
+					    line-height: 23px;
+					    margin-bottom: 30px;
+					    white-space: pre;
+					    overflow-x: auto;
+					    word-break: inherit;
+					    word-wrap: inherit;
+					}
+
+					pre a::before {
+					  content: counter(line-numbering);
+					  counter-increment: line-numbering;
+					  padding-right: 1em; /* space after numbers */
+					  width: 25px;
+					  text-align: right;
+					  opacity: 0.7;
+					  display: inline-block;
+					  color: #aaa;
+					  background: #eee;
+					  margin-right: 16px;
+					  padding: 2px 10px;
+					  font-size: 13px;
+					  -webkit-touch-callout: none;
+					  -webkit-user-select: none;
+					  -khtml-user-select: none;
+					  -moz-user-select: none;
+					  -ms-user-select: none;
+					  user-select: none;
+					}
+
+					pre a:first-of-type::before {
+					  padding-top: 10px;
+					}
+
+					pre a:last-of-type::before {
+					  padding-bottom: 10px;
+					}
+
+					pre a:only-of-type::before {
+					  padding: 10px;
+					}
+			
+					.highlight { background-color: #ffffcc } /* RIGHT */
+					</style>
+	      </head>
+	      <body>
+				  <div>
+							<div style='width:25%;'>
+									<ul id="tree" class="ztree" style='width:100%'>
+		
+									</ul>
+							</div>
+			        <div id='readme' style='width:70%;margin-left:20%;'>
+			          	<article class='markdown-body'>
+			            	<style>.highlight .hll { background-color: #ffffcc }
+.highlight  { background: #f0f0f0; }
+.highlight .c { color: #60a0b0; font-style: italic } /* Comment */
+.highlight .err { border: 1px solid #FF0000 } /* Error */
+.highlight .k { color: #007020; font-weight: bold } /* Keyword */
+.highlight .o { color: #666666 } /* Operator */
+.highlight .ch { color: #60a0b0; font-style: italic } /* Comment.Hashbang */
+.highlight .cm { color: #60a0b0; font-style: italic } /* Comment.Multiline */
+.highlight .cp { color: #007020 } /* Comment.Preproc */
+.highlight .cpf { color: #60a0b0; font-style: italic } /* Comment.PreprocFile */
+.highlight .c1 { color: #60a0b0; font-style: italic } /* Comment.Single */
+.highlight .cs { color: #60a0b0; background-color: #fff0f0 } /* Comment.Special */
+.highlight .gd { color: #A00000 } /* Generic.Deleted */
+.highlight .ge { font-style: italic } /* Generic.Emph */
+.highlight .gr { color: #FF0000 } /* Generic.Error */
+.highlight .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.highlight .gi { color: #00A000 } /* Generic.Inserted */
+.highlight .go { color: #888888 } /* Generic.Output */
+.highlight .gp { color: #c65d09; font-weight: bold } /* Generic.Prompt */
+.highlight .gs { font-weight: bold } /* Generic.Strong */
+.highlight .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.highlight .gt { color: #0044DD } /* Generic.Traceback */
+.highlight .kc { color: #007020; font-weight: bold } /* Keyword.Constant */
+.highlight .kd { color: #007020; font-weight: bold } /* Keyword.Declaration */
+.highlight .kn { color: #007020; font-weight: bold } /* Keyword.Namespace */
+.highlight .kp { color: #007020 } /* Keyword.Pseudo */
+.highlight .kr { color: #007020; font-weight: bold } /* Keyword.Reserved */
+.highlight .kt { color: #902000 } /* Keyword.Type */
+.highlight .m { color: #40a070 } /* Literal.Number */
+.highlight .s { color: #4070a0 } /* Literal.String */
+.highlight .na { color: #4070a0 } /* Name.Attribute */
+.highlight .nb { color: #007020 } /* Name.Builtin */
+.highlight .nc { color: #0e84b5; font-weight: bold } /* Name.Class */
+.highlight .no { color: #60add5 } /* Name.Constant */
+.highlight .nd { color: #555555; font-weight: bold } /* Name.Decorator */
+.highlight .ni { color: #d55537; font-weight: bold } /* Name.Entity */
+.highlight .ne { color: #007020 } /* Name.Exception */
+.highlight .nf { color: #06287e } /* Name.Function */
+.highlight .nl { color: #002070; font-weight: bold } /* Name.Label */
+.highlight .nn { color: #0e84b5; font-weight: bold } /* Name.Namespace */
+.highlight .nt { color: #062873; font-weight: bold } /* Name.Tag */
+.highlight .nv { color: #bb60d5 } /* Name.Variable */
+.highlight .ow { color: #007020; font-weight: bold } /* Operator.Word */
+.highlight .w { color: #bbbbbb } /* Text.Whitespace */
+.highlight .mb { color: #40a070 } /* Literal.Number.Bin */
+.highlight .mf { color: #40a070 } /* Literal.Number.Float */
+.highlight .mh { color: #40a070 } /* Literal.Number.Hex */
+.highlight .mi { color: #40a070 } /* Literal.Number.Integer */
+.highlight .mo { color: #40a070 } /* Literal.Number.Oct */
+.highlight .sa { color: #4070a0 } /* Literal.String.Affix */
+.highlight .sb { color: #4070a0 } /* Literal.String.Backtick */
+.highlight .sc { color: #4070a0 } /* Literal.String.Char */
+.highlight .dl { color: #4070a0 } /* Literal.String.Delimiter */
+.highlight .sd { color: #4070a0; font-style: italic } /* Literal.String.Doc */
+.highlight .s2 { color: #4070a0 } /* Literal.String.Double */
+.highlight .se { color: #4070a0; font-weight: bold } /* Literal.String.Escape */
+.highlight .sh { color: #4070a0 } /* Literal.String.Heredoc */
+.highlight .si { color: #70a0d0; font-style: italic } /* Literal.String.Interpol */
+.highlight .sx { color: #c65d09 } /* Literal.String.Other */
+.highlight .sr { color: #235388 } /* Literal.String.Regex */
+.highlight .s1 { color: #4070a0 } /* Literal.String.Single */
+.highlight .ss { color: #517918 } /* Literal.String.Symbol */
+.highlight .bp { color: #007020 } /* Name.Builtin.Pseudo */
+.highlight .fm { color: #06287e } /* Name.Function.Magic */
+.highlight .vc { color: #bb60d5 } /* Name.Variable.Class */
+.highlight .vg { color: #bb60d5 } /* Name.Variable.Global */
+.highlight .vi { color: #bb60d5 } /* Name.Variable.Instance */
+.highlight .vm { color: #bb60d5 } /* Name.Variable.Magic */
+.highlight .il { color: #40a070 } /* Literal.Number.Integer.Long */</style>
+<p># Foundation字符串,集合类  </p>
+
+<h2>字符串[理解]</h2>
+
+<h3>NSString</h3>
+
+<ul>
+<li>概念：NSString是不可变字符串，所有它所有产生其他字符串方法都是生成一个新的字符串，而不会改变原来字符串<br></li>
+<li>创建[掌握]<br>
+
+<ul>
+<li>字面量<br>
+
+<ul>
+<li>NSString * str = @&quot;abc&quot;<br></li>
+</ul></li>
+<li>对象方法<br>
+
+<ul>
+<li>NSString *str = [[NSString alloc] initWithUTF8String:&quot;abc&quot;]<br></li>
+</ul></li>
+<li>类方法<br>
+
+<ul>
+<li>NSString *str = [NSString stringWithFormat:@&quot;Jack&quot;];<br></li>
+</ul></li>
+<li>区别：通过字面的方式创建出来的对象保存在常量区，通过对象方法和类方法创建出来的对象保存着堆中<br></li>
+</ul></li>
+<li>字符串判断与比较【掌握】<br>
+
+<ul>
+<li>判断字符串是不为空<br>
+
+<ul>
+<li>str != nil &amp;&amp; str.length !=0<br></li>
+</ul></li>
+<li>判读两个字符串相等<br>
+
+<ul>
+<li>判读两个字符串的地址相等<br>
+
+<ul>
+<li>str1 == str2<br></li>
+</ul></li>
+<li>判断两个字符串内容相等<br>
+
+<ul>
+<li>[str1 isEqualToString str2]<br></li>
+</ul></li>
+<li>自己实现一个判读字符内容相等的方法<br>
+
+<ul>
+<li>第一步：如果两个字符串地址相等返回YES<br></li>
+<li>第二步：一个字符一个字符的比较遇到不相等的字符就返回NO<br></li>
+<li>第三步：返回YES<br></li>
+</ul></li>
+</ul></li>
+<li>判断开头结尾<br>
+
+<ul>
+<li>判断字符串是否以某个字符串开头<br>
+
+<ul>
+<li>[str hasPrefix:@&quot;www&quot;]<br></li>
+</ul></li>
+<li>判断字符串是否一个某个字符串结尾<br>
+
+<ul>
+<li>[str hasSuffix:@&quot;cn&quot;]<br></li>
+</ul></li>
+</ul></li>
+<li>比较两个字符串<br>
+
+<ul>
+<li>从前往后比较严格区分大小写<br>
+
+<ul>
+<li>[str1 compare:str2]<br>
+
+<ul>
+<li>NSComparisonResult<br>
+
+<ul>
+<li></li>
+<li></li>
+<li></li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li>带条件的比较<br>
+
+<ul>
+<li> [str1 compare:str1 options:(NSStringCompareOptions)]<br>
+
+<ul>
+<li>NSStringCompareOptions<br>
+
+<ul>
+<li></li>
+<li></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li>字符串转换【理解】<br>
+
+<ul>
+<li>基本数据类型转换字符串<br>
+
+<ul>
+<li> [NSString stringWithFormat:@&quot;%d,%f,%lf,%c&quot;,10,10.1f,10.2,&#39;a&#39;]<br></li>
+</ul></li>
+<li>字符串转基本数据类型<br>
+
+<ul>
+<li> [str intValue];<br>
+ [str floatValue];<br>
+ [str doubleValue];<br></li>
+<li>[str characterAtIndex:0]<br></li>
+</ul></li>
+<li>字符串所有字符全部转小写<br>
+
+<ul>
+<li>[str lowercaseString]<br></li>
+</ul></li>
+<li>字符串所有字符全部转大写<br>
+
+<ul>
+<li>[str uppercaseString]<br></li>
+</ul></li>
+<li>字符串每个单词的首字母大写,两个单词之间需使用空格隔开<br>
+
+<ul>
+<li>[str4 capitalizedString]<br></li>
+<li>如：today is good day -&gt; Today Is Good Day<br></li>
+</ul></li>
+<li>把C语言字符串转换为OC字符串<br>
+
+<ul>
+<li>[NSString stringWithCString:&quot;Jack&quot; encoding:NSUTF8StringEncoding];<br></li>
+<li>[[NSString alloc] initWithCString:&quot;Jack&quot; encoding:NSUTF8StringEncoding];<br></li>
+</ul></li>
+<li>把OC字符串转换为C语言字符串<br>
+
+<ul>
+<li>[str cStringUsingEncoding:NSUTF8StringEncoding]<br></li>
+</ul></li>
+</ul></li>
+<li>字符串替换【理解】<br>
+
+<ul>
+<li>注意：此类字符串都是以stringBy开头，此类字符都生成一个新的字符串原有的字符串不变了<br></li>
+<li>在原有字符串的末尾拼接另一个字符产生一个新的字符串<br>
+
+<ul>
+<li>[str1 stringByAppendingString: st2]<br></li>
+</ul></li>
+<li>字符串替换<br>
+
+<ul>
+<li>使用某个字符串替换掉原来字符串中某个区间的字符串<br>
+
+<ul>
+<li>  [str stringByReplacingCharactersInRange:(NSRange) withString:(NSString *)]<br></li>
+</ul></li>
+<li>使用一个新的字符串替换掉原来字符串中的某个子串<br>
+
+<ul>
+<li>str = @&quot;www-itcast-cn&quot;;<br>
+str2 = [str stringByReplacingOccurrencesOfString:@&quot;-&quot;withString:@&quot;.&quot;];<br></li>
+</ul></li>
+<li>删除原字符串中的所有指定的字符<br>
+
+<ul>
+<li>str = @&quot;www-.itcast.-cn&quot;;<br>
+str2 = [str stringByReplacingOccurrencesOfString:@&quot;-&quot;withString:@&quot;&quot;];<br></li>
+</ul></li>
+<li>【掌握】去掉两头的空格<br>
+
+<ul>
+<li>[str stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]<br>
+
+<ul>
+<li>NSCharacterSet<br>
+
+<ul>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li>字符串与路径【了解】<br>
+
+<ul>
+<li>是否是绝对路径<br>
+
+<ul>
+<li>- (BOOL)isAbsolutePath;<br></li>
+</ul></li>
+<li>最后一部分路径<br>
+
+<ul>
+<li>- (NSString *)lastPathComponent;<br></li>
+</ul></li>
+<li>删除最后一部分路径<br>
+
+<ul>
+<li>- (NSString *)stringByDeletingLastPathComponent<br></li>
+</ul></li>
+<li>在原来的路径上拼接一个路径<br>
+
+<ul>
+<li>- (NSString *)stringByAppendingPathComponent:(NSString *)str<br></li>
+</ul></li>
+<li>获取文件的扩展名<br>
+
+<ul>
+<li>- (NSString *)pathExtension;<br></li>
+</ul></li>
+<li>删除文件的扩展名<br>
+
+<ul>
+<li>- (NSString *)stringByDeletingPathExtension;<br></li>
+</ul></li>
+<li>在文件末尾增加一个扩展名<br>
+
+<ul>
+<li>- (NSString *)stringByAppendingPathExtension:(NSString *)str;<br></li>
+</ul></li>
+</ul></li>
+<li>字符串与文件【理解】<br>
+
+<ul>
+<li>写入文件<br>
+
+<ul>
+<li>    NSError *error = nil;<br>
+   [str2 writeToFile:@&quot;/Users/lideshan/Desktop/test.txt&quot; atomically:YES encoding:NSUTF8StringEncoding error:&amp;error];<br>
+        if (error) {<br>
+            NSLog(@&quot;%@&quot;,error);<br>
+        }else{<br>
+            NSLog(@&quot;写入成功&quot;);<br>
+        }<br></li>
+</ul></li>
+<li>读取文件<br>
+
+<ul>
+<li>        NSError *error = nil;<br>
+  NSString *str3 = [NSString stringWithContentsOfFile:@&quot;/Users/lideshan/Desktop/test.txt&quot;  encoding:NSUTF8StringEncoding error:&amp;error];<br>
+        if (error) {<br>
+            NSLog(@&quot;%@&quot;,error);<br>
+        }else{<br>
+            NSLog(@&quot;%@&quot;,str3);<br>
+        }<br></li>
+</ul></li>
+</ul></li>
+<li>字符串与URL【理解】<br>
+
+<ul>
+<li>URL<br>
+
+<ul>
+<li>概念:Uniform Resource Locator 统一资源定位符<br></li>
+<li>URL格式：协议头://主机[IP,服务器]/路径<br>
+
+<ul>
+<li>互联网<br>
+
+<ul>
+<li><a href="http://ios.itcast.cn/ios/images/content_25.jpg"><u>http://ios.itcast.cn/ios/images/content_25.jpg</u></a><br>
+http: 协议头，超文本传输协议，用于万维网[互联网]<br>
+<a href="http://ios.itscast.cn">ios.itscast.cn</a> 主机域名,代表主机<br>
+<a href="http://ios.itcast.cn/ios/images/content_25.jpg"><u>/ios/images/content_25.jpg</a> 图片在主机下面的绝对路径</u><br></li>
+</ul></li>
+<li>本地文件<br>
+
+<ul>
+<li><a href="file:///Users/lideshan/Desktop/test.txt">file:///Users/lideshan/Desktop/test.txt</a><br>
+file:协议头，表示文件协议<br>
+由于文件都在保存在本机上，所以主机名称省略<br>
+路径：<a href="file:///Users/lideshan/Desktop/test.txt">/Users/lideshan/Desktop/test.txt</a><br></li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li>从URL中读取字符串<br>
+
+<ul>
+<li>+ (instancetype)stringWithContentsOfURL:(NSURL <em>)url encoding:(NSStringEncoding)enc error:(NSError *</em>)error;<br></li>
+</ul></li>
+<li>将字符串写入URL对应的资源中<br>
+
+<ul>
+<li>- (BOOL)writeToURL:(NSURL <em>)url atomically:(BOOL)useAuxiliaryFile encoding:(NSStringEncoding)enc error:(NSError *</em>)error;<br></li>
+</ul></li>
+</ul></li>
+<li>字符串获取【理解】<br>
+
+<ul>
+<li>获取字符串的长度<br>
+
+<ul>
+<li>str.length<br></li>
+</ul></li>
+<li>获取字符串中某个索引上的字符<br>
+
+<ul>
+<li>[str characterAtIndex:1]<br></li>
+</ul></li>
+<li>获取子串<br>
+
+<ul>
+<li>获取从开始位置到某个索引的子串<br>
+
+<ul>
+<li> [str substringToIndex:2]<br></li>
+</ul></li>
+<li>获取从某个索引开始到字符结尾的子串<br>
+
+<ul>
+<li> [str substringFromIndex:2]<br></li>
+</ul></li>
+<li>获取某个区间的子串<br>
+
+<ul>
+<li>[str substringWithRange:range]<br>
+
+<ul>
+<li>NSRange<br>
+
+<ul>
+<li></li>
+<li></li>
+<li></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li>获取某个子串所在的区间<br>
+
+<ul>
+<li>从前往后找找到的第一个子串的所在的区间<br>
+
+<ul>
+<li> [str rangeOfString:@&quot;it&quot;]<br></li>
+</ul></li>
+<li>可以指定查找方式<br>
+
+<ul>
+<li>[str rangeOfString:@&quot;it&quot; options:(NSStringCompareOptions)]<br>
+
+<ul>
+<li>NSStringCompareOptions枚举类型<br>
+
+<ul>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li>练习<br>
+
+<ul>
+<li>用3种方法将下面字符串中的中文截取出来<br>
+ <itcast>传智播客</itcast><br></li>
+</ul></li>
+</ul></li>
+</ul>
+
+<h3>NSMutableString</h3>
+
+<ul>
+<li>概念：表示可变的字符串，你可以在原来的串上添加、修改、删除操作，它使NSString的子类<br></li>
+<li>末尾拼接字符串<br>
+
+<ul>
+<li>- (void)appendString:(NSString *)aString;<br></li>
+<li>- (void)appendFormat:(NSString *)format, ...<br></li>
+<li> 练习：1.利用NSString将10个itcast拼接起来, 中间用空格隔开, 最后写入文件中<br>
+      2..利用NSMutableString将10个itcast拼接起来, 中间用空格隔开, 最后写入文件中<br></li>
+</ul></li>
+<li>在某个位置插入一个字符串<br>
+
+<ul>
+<li>- (void)insertString:(NSString *)aString atIndex:(NSUInteger)loc;<br></li>
+</ul></li>
+<li>使用新字符串替换字符串中的已有字符串<br>
+
+<ul>
+<li>- (void)replaceCharactersInRange:(NSRange)range withString:(NSString *)aString;<br></li>
+<li>- (NSUInteger)replaceOccurrencesOfString:(NSString *)target withString:(NSString *)replacement options:(NSStringCompareOptions)options range:(NSRange)searchRange;<br></li>
+</ul></li>
+<li>删除某个区间的字符串<br>
+
+<ul>
+<li>- (void)deleteCharactersInRange:(NSRange)range;<br></li>
+</ul></li>
+<li>NSString转NSMutableString<br>
+
+<ul>
+<li>- (void)setString:(NSString *)aString;<br>
+ strM.string = @&quot;abc&quot;;<br></li>
+</ul></li>
+</ul>
+
+<h2>集合类【掌握】</h2>
+
+<h3>特点</h3>
+
+<ul>
+<li>用于存储多个OC对象，相当于存储对象的容器，我们也称它们为容器类<br></li>
+<li>只能存放OC对象不能存放基本数据类型、结构体、枚举<br></li>
+</ul>
+
+<h3>数组</h3>
+
+<ul>
+<li>概念：有序的对象集合，可以存放任意的OC对象<br></li>
+<li>特点<br>
+
+<ul>
+<li>同一数组中可以存放不同的类型的对象<br></li>
+<li>同一个对象可以被存入数组中多次<br></li>
+<li>不能存放基本数据类型，基本数据类型需要转换成其包装类型，然后再存放到数组中<br></li>
+<li>数组中的元素是有序的<br></li>
+<li>通常我们在一个数组中只存储一种类型的对象，便于批量操作<br></li>
+</ul></li>
+<li>NSArray<br>
+
+<ul>
+<li>概念：不可变数组，一经创建就不能添加，删除，修改其中的元素，<br></li>
+<li>创建<br>
+
+<ul>
+<li>类方法<br>
+
+<ul>
+<li> NSArray *array =  [NSArray arrayWithObjects:@1,@2,@3,nil];<br></li>
+</ul></li>
+<li>初始化方法<br>
+
+<ul>
+<li>NSArray *array =  [[NSArray alloc] initWithObjects:p1,p2, nil];<br></li>
+</ul></li>
+<li>快捷方式<br>
+
+<ul>
+<li> NSArray *array = @[@1,@2,@3];<br></li>
+</ul></li>
+</ul></li>
+<li>访问其中的元素<br>
+
+<ul>
+<li>通过对象方法<br>
+
+<ul>
+<li> [array objectAtIndex:0]<br></li>
+</ul></li>
+<li>快捷方式<br>
+
+<ul>
+<li>array[0]<br></li>
+</ul></li>
+</ul></li>
+<li>获取数组的长度<br>
+
+<ul>
+<li>[array count]<br></li>
+<li>array.count<br></li>
+</ul></li>
+<li>判断数组中是否包含某个对象<br>
+
+<ul>
+<li>[array containsObject:p1]<br>
+
+<ul>
+<li>这里是通过调用isEqual:方法来判断对象是否相等的<br></li>
+</ul></li>
+</ul></li>
+<li>遍历数组<br>
+
+<ul>
+<li>普通的for 循环<br></li>
+<li>增强的for循环<br>
+
+<ul>
+<li> for (CZPerson *p in array) {<br>
+     NSLog(@&quot;%@&quot;,p.name);<br>
+ }<br></li>
+</ul></li>
+<li>使用block的方式<br>
+
+<ul>
+<li> [array enumerateObjectsUsingBlock:^(CZPerson *person, NSUInteger idx, BOOL *stop) {<br>
+            NSLog(@&quot;index = %zd,name = %@&quot;,idx,person.name);<br>
+        }];<br></li>
+</ul></li>
+<li>使用枚举器【几乎不用】<br>
+
+<ul>
+<li>  NSEnumerator *enumer =  [array objectEnumerator];<br>
+  CZPerson *person;<br>
+  while (person = [enumer nextObject]) {<br>
+       NSLog(@&quot;name = %@&quot;,person.name);<br>
+  }<br></li>
+</ul></li>
+</ul></li>
+<li>让数组中的所有元素执行某个方法<br>
+
+<ul>
+<li>[array makeObjectsPerformSelector:@selector(run)];<br>
+[array makeObjectsPerformSelector:@selector(eat:) withObject:@&quot;狗不理包子&quot;];<br></li>
+</ul></li>
+<li>排序<br>
+
+<ul>
+<li>使用选择器进行排序<br>
+要求数组中的对象必须实现该选择器对应的方法，返回一个排好序的数组<br>
+
+<ul>
+<li> NSArray *sortedArray  = [array sortedArrayUsingSelector:@selector(compare:)];<br></li>
+</ul></li>
+<li>使用比较器block<br>
+要求该block种必须返回<br>
+NSComparisonResult枚举的成员<br>
+
+<ul>
+<li>  NSArray *sortedArray  = [array sortedArrayUsingComparator:^NSComparisonResult(CZPerson * obj1, CZPerson * obj2) {<br>
+          return [obj1.name compare:obj2.name];<br>
+  }];<br></li>
+</ul></li>
+<li>使用属性描述器<br>
+这里属性必须是可排序的<br>
+按照顺序比较各个属性<br>
+
+<ul>
+<li>NSArray *array =  [[NSArray alloc] initWithObjects:p1,p2, nil];<br>
+NSSortDescriptor *d1 = [NSSortDescriptor sortDescriptorWithKey:@&quot;age&quot; ascending:YES];<br>
+NSSortDescriptor *d2 = [NSSortDescriptor sortDescriptorWithKey:@&quot;name&quot;ascending:YES];<br>
+NSArray *  sortedArray = [array sortedArrayUsingDescriptors:@[d1,d2]];<br></li>
+</ul></li>
+</ul></li>
+<li>数组与字符串<br>
+
+<ul>
+<li>字符串转数组<br>
+
+<ul>
+<li> NSString *str = @&quot;a,b,c,d&quot;;<br>
+ NSArray *arr = [str componentsSeparatedByString:@&quot;,&quot;];<br></li>
+</ul></li>
+<li>数组转字符串<br>
+
+<ul>
+<li> NSString *str1 = [array componentsJoinedByString:@&quot;-&quot;];<br></li>
+</ul></li>
+</ul></li>
+<li>数组与文件<br>
+
+<ul>
+<li>数组写入文件<br>
+
+<ul>
+<li>[arr writeToFile:@&quot;/Users/lideshan/Desktop/test.txt&quot; atomically:YES];<br></li>
+</ul></li>
+<li>从文件中读取数组<br>
+
+<ul>
+<li>NSArray *array = [NSArray arrayWithContentsOfFile:@&quot;/Users/lideshan/Desktop/test.txt&quot;];<br></li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li>NSMutableArray<br>
+
+<ul>
+<li>概念：可变数组，继承NSArray<br>
+可变数组支持插入,删除,修改的操作<br></li>
+<li>创建<br>
+
+<ul>
+<li>快捷构造方法【常用】<br>
+
+<ul>
+<li>创建一个空数组,数组容量为0<br>
+
+<ul>
+<li>NSMutableArray *arrayM = [NSMutableArray array]<br></li>
+</ul></li>
+<li>创建一个容量为10的空数组<br>
+这个容量并不是说数组中只能存放10个元素<br>
+而是一开始就将数组初始化为10个元素，不够用可以动态的增加，这样可以提高效率<br>
+
+<ul>
+<li>  NSMutableArray *arrayM = [NSMutableArray arrayWithCapacity:10];<br></li>
+</ul></li>
+</ul></li>
+<li>初始化方法【不常用】<br>
+
+<ul>
+<li>[[NSMutableArray alloc] init];<br></li>
+</ul></li>
+<li>注意：可变数组不能使用@[p1,p2]方式创建，这种简便的方式只能用于创建不可变数组<br></li>
+</ul></li>
+<li>在末尾添加元素<br>
+
+<ul>
+<li>[arrayM  addObject:p1];<br></li>
+</ul></li>
+<li>在某个索引插入元素<br>
+
+<ul>
+<li>[arrayM insertObject:p1 atIndex:1];<br></li>
+</ul></li>
+<li>删除元素<br>
+
+<ul>
+<li>删除某个索引位置的元素<br>
+注意不要让数组下标越界<br>
+
+<ul>
+<li>[arrayM removeObjectAtIndex:1]<br></li>
+</ul></li>
+<li>删除某个对象,<br>
+根据isEqual方法进行比较与给定对象相等的都会被删除<br>
+
+<ul>
+<li>[arrayM removeObject:p1]<br></li>
+</ul></li>
+<li>删除数组中某个区间的元素<br>
+注意不要让数组下标越界<br>
+
+<ul>
+<li> NSRange range = {1,1};<br>
+  [arrayM removeObjectsInRange:range];<br></li>
+</ul></li>
+<li>清空数组<br>
+
+<ul>
+<li>  [arrayM removeAllObjects];<br></li>
+</ul></li>
+</ul></li>
+<li>遍历并删除数组<br>
+
+<ul>
+<li>不可以使用枚举器的方式遍历的同时删除数组<br></li>
+<li>不可以forin的方式遍历的同时删除数组<br></li>
+<li>不可以使用block的方法遍历的同时删除数组<br></li>
+<li>可以通过普通的for循环遍历的同时删除数组<br>
+删除一个元素后要把i--<br>
+
+<ul>
+<li> for (int i = 0; i &lt; arrayM.count; i++) {<br>
+            CZPerson *person = arrayM[i];<br>
+            if (person.age == 0) {<br>
+                [arrayM removeObjectAtIndex:i];<br>
+                i--;<br>
+            }<br>
+        }<br></li>
+</ul></li>
+<li>可以通过先把要删除的数组放到一个新的数组中来，遍历完之后再删除它<br>
+
+<ul>
+<li>    NSMutableArray *temp = [NSMutableArray array];<br>
+        for (CZPerson *person in arrayM) {<br>
+            if (person.age == 0) {<br>
+                [temp addObject:person];<br>
+            }<br>
+        }<br>
+        [arrayM removeObjectsInArray:temp];<br></li>
+</ul></li>
+</ul></li>
+<li>NSArray 转 NSMutableArray<br>
+
+<ul>
+<li>- (void)setArray:(NSArray *)otherArray;<br>
+ arrayM.array = @[@1,@2];<br></li>
+</ul></li>
+</ul></li>
+</ul>
+
+			          	</article>
+			        </div>
+					</div>
+	      </body>
+	    </html>
+			<script type="text/javascript" src="/var/lib/gems/2.5.0/gems/tocmd-0.4.3/vendor/toc/js/jquery-1.4.4.min.js"></script>
+			<script type="text/javascript" src="/var/lib/gems/2.5.0/gems/tocmd-0.4.3/vendor/toc/js/jquery.ztree.all-3.5.min.js"></script>
+			<script type="text/javascript" src="/var/lib/gems/2.5.0/gems/tocmd-0.4.3/vendor/toc/js/ztree_toc.js"></script>
+			<SCRIPT type="text/javascript" >
+			<!--
+			$(document).ready(function(){
+				$('#tree').ztree_toc({
+					is_auto_number:true,
+					documment_selector:'.markdown-body'
+				});
+			});
+			//-->
+			</SCRIPT>
+	  
